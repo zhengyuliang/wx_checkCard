@@ -50,5 +50,10 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  getRecord: function(){
+    wx.navigateTo({
+      url: '/pages/record/record'
+    })
   }
 })

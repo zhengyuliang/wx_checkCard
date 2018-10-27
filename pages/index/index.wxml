@@ -1,2 +1,11 @@
 <!--index.wxml-->
 <view>惠智付核销dev</view>
+<view class='list-body'>
+  <view class='title'>
+    <text>最近核销记录</text>
+    <view class='more' bindtap='getRecord'>更多>></view>
+  </view>
+  <view class='list'>
+    列表内容
+  </view>
+</view>

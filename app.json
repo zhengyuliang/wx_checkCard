@@ -1,12 +1,12 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/record/record"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#CD2E2E",
     "navigationBarTitleText": "惠智付核销",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"#ffffff"
   }
 }
