@@ -1,0 +1,10 @@
+<!--pages/detail/detail.wxml-->
+<view>
+  <button bindtap="clickbtn">单机</button>
+  <button bindtap="clickbtn2">点击显示取消</button>
+  <button bindtap="clickbtn3">显示取消和确认</button>
+  <view>
+    <alert wx:if="{{showAlert}}" bind:cancelInfo="clickInfo" alertArr="{{alertArr}}"></alert>
+  </view>
+</view>
+

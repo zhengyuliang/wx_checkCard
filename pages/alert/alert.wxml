@@ -1,0 +1,14 @@
+<!--pages/alert/alert.wxml-->
+<view class="wrap">
+   <view class="modals">
+      <view class="innerText" hidden="{{flag}}">主要内容</view>
+      <view class="mulitConts" hidden="{{!flag}}" >情况</view>
+      <view class="btn">
+        <button class="sure" bindtap="sureorcancel" wx:if='{{alertArr.length ==1}}'>{{alertArr[0]}}</button>
+        <view wx:if='{{alertArr.length ==2}}'>
+          <button class="cancel" bindtap="sureorcancel">{{alertArr[0]}}</button>
+          <button class="sure" bindtap="sureorcancel">{{alertArr[1]}}</button>
+        </view>
+      </view>
+   </view>
+</view>
