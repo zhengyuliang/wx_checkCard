@@ -1,1 +1,121 @@
 /* pages/record/record.wxss */
+.container{
+  background: #EFEFF4;
+}
+.top-box{
+  height: 120rpx;
+  background: #EFEFF4; 
+}
+.record-top{
+  height: 100rpx;
+  background: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 80rpx 0 24rpx;
+  align-items: center;
+}
+.custom-time{
+  position: relative;
+}
+.angle{
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left:4px solid transparent;
+  border-right:4px solid transparent;
+  border-top:8px solid #4A4A4A;
+  top:20rpx;
+  right:-20px; 
+}
+.scroll-view{
+  background: #FFFFFF;
+}
+.record-list{
+  border: 1rpx solid #E5E5E5;
+}
+.rlist-one{
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 24rpx 24rpx 24rpx;
+  color: #000000;
+  font-size: 30rpx;
+
+}
+.rlist-two{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24rpx 30rpx 24rpx;
+  color: #999999;
+  font-size: 24rpx;
+}
+.mark{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.75);
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+.box{
+  /* margin: auto; */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left:0;
+  width: 100%;
+  height: 50%;
+  background: #ffff;
+}
+.select-time{
+  font-size: 34rpx;
+  color: #0C161F;
+  font-weight: 600;
+  padding: 50rpx 0 20rpx 20rpx;
+}
+.btn-grounp{
+  display: flex;
+  justify-content: space-between;
+  /* padding: 20px; */
+  padding-left: 40rpx;
+  flex-wrap: wrap;
+}
+.select-btn{
+  width: 27%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background: #F6F6F6;
+  margin-right: 40rpx;
+  margin-top: 40rpx;
+}
+.active{
+  background: #FFF8F8;
+  color: #CA191D;
+  border: 1rpx solid #CA191D;
+}
+.bot-btn{
+  height: 120rpx;
+  background: #F7F7F7;
+  display: flex;
+  align-items: center;
+  margin-top: 60rpx;
+  justify-content: space-around;
+  padding: 0rpx 130rpx 0 130rpx;
+}
+.bot-btn view{
+  width: 180rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.cancel-btn{
+  background: #FFFFFF;
+  color: #0C161F;
+  border: 1rpx solid #CECECE;
+}
+.sure-btn{
+  background: #CA191D;
+  color: #ffff;
+}
