@@ -1,11 +1,34 @@
 <!--index.wxml-->
-<view>惠智付核销dev</view>
-<view class='list-body'>
-  <view class='title'>
-    <text>最近核销记录</text>
-    <view class='more' bindtap='getRecord'>更多>></view>
+<view class='btn-body'>
+  <view class='btn'>
+    <image src="/images/saoma.png" mode='aspectFit' class='image'></image>
   </view>
-  <view class='list'>
-    列表内容
+  <view class='text'>扫码核销优惠券</view>
+</view>
+<view class='title'>
+  <view class='jxt'>
+    <image src="/images/icon_1.png" mode='aspectFit' class='icon'></image>
+    <text>最近核销记录</text>
+  </view>
+  <view class='more' bindtap='getRecord'>查看更多</view>
+</view>
+<view class='list'>
+  <view class='l-title'>
+    <text class='t-1'>芙蓉王活动抵扣券</text>
+    <text class='t-2'>￥2.00</text>
+  </view>
+  <view class='l-title l-info'>
+    <text class='t-1'>856562652652652</text>
+    <text class='t-3'>2018-10-11 15:21:14</text>
+  </view>
+</view>
+<view class='list'>
+  <view class='l-title'>
+    <text class='t-1'>芙蓉王活动抵扣券</text>
+    <text class='t-2'>￥2.00</text>
+  </view>
+  <view class='l-title l-info'>
+    <text class='t-1'>856562652652652</text>
+    <text class='t-3'>2018-10-11 15:21:14</text>
   </view>
 </view>
