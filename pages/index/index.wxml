@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class='btn-body'>
-  <view class='btn'>
+  <view class='btn' bindtap='getscanCodeData'>
     <image src="/images/saoma.png" mode='aspectFit' class='image'></image>
   </view>
   <view class='text'>扫码核销优惠券</view>
@@ -10,25 +10,39 @@
     <image src="/images/icon_1.png" mode='aspectFit' class='icon'></image>
     <text>最近核销记录</text>
   </view>
-  <view class='more' bindtap='getRecord'>查看更多</view>
+  <view class='more' bindtap='getRecord' wx:if="{{fiveRecord.length > 3}}">查看更多</view>
 </view>
-<view class='list'>
+<view class='list' wx:for="{{fiveRecord}}">
   <view class='l-title'>
-    <text class='t-1'>芙蓉王活动抵扣券</text>
-    <text class='t-2'>￥2.00</text>
+    <text class='t-1'>{{item.name}}</text>
+    <text class='t-2'>￥{{item.price}}</text>
   </view>
   <view class='l-title l-info'>
-    <text class='t-1'>856562652652652</text>
-    <text class='t-3'>2018-10-11 15:21:14</text>
+    <text class='t-1'>{{item.code}}</text>
+    <text class='t-3'>{{item.time}}</text>
   </view>
 </view>
-<view class='list'>
-  <view class='l-title'>
-    <text class='t-1'>芙蓉王活动抵扣券</text>
-    <text class='t-2'>￥2.00</text>
+<view class='l-text' wx:if="{{fiveRecord.length === 0}}">暂无最新核销记录</view>
+<!-- 查询到弹窗内容 -->
+<view class='z-modal-mask z-modal-mask-{{maskType}}'></view>
+ <view class='z-modal-warp z-modal-warp-{{showType}}'>
+  <view class="z-modal-body">
+    <view class='modal-list'>
+      <view class='m-title'>{{isGood.name}}</view>
+      <view class='m-price'>￥{{isGood.price}}</view>
+    </view>
+    <text class='z-info'>{{isGood.code}}</text>
   </view>
-  <view class='l-title l-info'>
-    <text class='t-1'>856562652652652</text>
-    <text class='t-3'>2018-10-11 15:21:14</text>
+  <view class='z-modal-footer'>
+    <view class='z-btn' bindtap='cancelShowType'>取消</view>
+    <view class='z-btn z-btn-red' bindtap='okShowType'>确定核销</view>
+  </view>
+</view>
+<!-- 确定弹窗内容 -->
+<view class='z-modal-warp z-modal-warp-{{infoType}}'>
+  <view class='y-modal-text'>{{infoText}}</view>
+  <view class='z-modal-footer'>
+    <view class='z-btn' bindtap='cancelinfoType'>关闭</view>
+    <view class='z-btn z-btn-red' bindtap='okinfoType' wx:if="{{isOK}}">重新核销</view>
   </view>
 </view>

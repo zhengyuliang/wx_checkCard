@@ -81,3 +81,99 @@ page{
   text-align: right;
   width: 50%;
 }
+
+/* 弹窗信息内容 */
+.z-modal-mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  transition:all 300ms linear;
+  z-index: 10000;
+}
+.z-modal-mask-show{
+  opacity: 1;
+  display: block;
+}
+.z-modal-mask-hide{
+  opacity: 0;
+  display: none;
+}
+.z-modal-warp{
+  position: fixed;
+  background-color: #fff;
+  border-radius: 10rpx;
+  width: 80%;
+  padding: 20rpx;
+  box-sizing: border-box;
+  left: 10%;
+  top: 0;
+  z-index: 10001;
+  box-shadow:-1rpx 1rpx 12rpx 6rpx rgba(0,0,0,0.2);
+  transition:all 300ms linear;
+}
+.z-modal-warp-hide{
+  opacity: 0;
+  transform:translateY(100vh);
+}
+.z-modal-warp-show{
+  opacity: 1;
+  transform:translateY(30vh);
+}
+.z-modal-body{
+  padding:30rpx 20rpx;
+  display: block;
+}
+.modal-list{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 36rpx;
+  color: #333;
+} 
+.m-title{
+  flex: 1;
+}
+.m-price{
+  width: 200rpx;
+  text-align: right;
+}
+.z-info{
+  color: #999;
+  font-size: 28rpx;
+}
+
+.z-modal-footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:10px;
+}
+.z-btn{
+  border-radius:80rpx;
+  font-size:34rpx;
+  color:#CA191D;
+  border:1rpx solid #CA191D;
+  padding:20rpx 0;
+  margin:0 15rpx;
+  width:210rpx;
+  text-align:center;
+}
+.z-btn-red{
+  color: #fff;
+  background-color: #CA191D;
+}
+.y-modal-text{
+  padding: 50rpx 0;
+  text-align: center;
+}
+.l-text{
+  text-align: center;
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 50rpx;
+}

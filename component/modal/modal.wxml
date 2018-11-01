@@ -2,5 +2,8 @@
 <view class='z-modal-mask'></view>
 <view class='z-modal-class'>
   <view class='z-title' wx:if="{{titleShow}}">{{title}}</view>
-  <view class="i-modal-body"><slot></slot></view>
+  <view class="z-modal-body"><slot></slot></view>
+  <view class='z-modal-footer'>
+    <view class='z-btn'></view>
+  </view>
 </view>
