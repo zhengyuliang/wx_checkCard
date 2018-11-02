@@ -12,7 +12,7 @@
   </view>
   <view class='more' bindtap='getRecord' wx:if="{{fiveRecord.length > 3}}">查看更多</view>
 </view>
-<view class='list' wx:for="{{fiveRecord}}">
+<view class='list' wx:for="{{fiveRecord}}" wx:key="{{index}}">
   <view class='l-title'>
     <text class='t-1'>{{item.name}}</text>
     <text class='t-2'>￥{{item.price}}</text>

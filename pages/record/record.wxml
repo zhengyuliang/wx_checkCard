@@ -9,23 +9,24 @@
   <scroll-view scroll-y style="height: {{screenHeight}}px;" bindscrolltolower="tolower" class="scroll-view">
     <view class="record-list" wx:for="{{recordList}}" wx:key="{{index}}">
        <view class="rlist-one">
-          <text>{{item.name}}</text><text>{{item.price}}</text>
+          <text>{{item.name}}</text><text>￥{{item.price}}</text>
        </view>
        <view class="rlist-two">
-          <text>{{item.code}}</text><text>{{item.date}}</text>
+          <text>{{item.code}}</text><text>{{item.time}}</text>
        </view>
     </view>
   </scroll-view>
   <!-- 筛选时间 -->
-  <view class="mark" wx:if="{{showMark}}">
-     <view class="box">
+  <view class='z-modal-mask z-modal-mask-{{maskType}}'></view>
+  <view class='z-modal-warp z-modal-warp-{{showType}}'>
        <view class="select-time">选择时间</view>
        <view class="btn-grounp">
-          <view id="{{index}}" wx:for="{{selecttiemList}}" wx:key="{{index}}" class="select-btn {{selectId==index? 'active': ''}}" bindtap="selectTime">{{item}}</view>
+          <view data-index="{{index}}" wx:for="{{selecttiemList}}" wx:key="{{index}}" class="select-btn " bindtap="selectTime">
+           <text class="text-z {{selectId === index ? 'active': ''}}">{{item}}</text>
+          </view>
        </view>
        <view class="bot-btn">
          <view class="cancel-btn" bindtap="cancelSeclec">取消</view><view class="sure-btn" bindtap="sureSelect">确定</view>
        </view>
-     </view>
   </view>
 </view>

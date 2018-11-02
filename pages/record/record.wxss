@@ -21,11 +21,11 @@
   position: absolute;
   width: 0;
   height: 0;
-  border-left:4px solid transparent;
-  border-right:4px solid transparent;
-  border-top:8px solid #4A4A4A;
+  border-left:8rpx solid transparent;
+  border-right:8rpx solid transparent;
+  border-top:16rpx solid #4A4A4A;
   top:20rpx;
-  right:-20px; 
+  right:-30rpx; 
 }
 .scroll-view{
   background: #FFFFFF;
@@ -48,6 +48,49 @@
   color: #999999;
   font-size: 24rpx;
 }
+
+/* 弹窗信息内容 */
+.z-modal-mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  transition:all 300ms linear;
+  z-index: 10000;
+}
+.z-modal-mask-show{
+  opacity: 1;
+  display: block;
+}
+.z-modal-mask-hide{
+  opacity: 0;
+  display: none;
+}
+
+.z-modal-warp{
+  position: fixed;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  left: 0;
+  /* top: 0; */
+  z-index: 10001;
+  transition:all 300ms linear;
+}
+.z-modal-warp-hide{
+  opacity: 0;
+  top:-100vh;
+  /* transform:translateY(-100vh); */
+}
+.z-modal-warp-show{
+  opacity: 1;
+  top: 0;
+  /* transform:translateY(30vh); */
+}
 .mark{
     width: 100%;
     height: 100%;
@@ -56,8 +99,8 @@
     left: 0;
     top: 0;
 }
-.box{
-  /* margin: auto; */
+/* .box{
+  margin: auto;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -66,7 +109,7 @@
   width: 100%;
   height: 50%;
   background: #ffff;
-}
+} */
 .select-time{
   font-size: 34rpx;
   color: #0C161F;
@@ -75,31 +118,41 @@
 }
 .btn-grounp{
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   /* padding: 20px; */
-  padding-left: 40rpx;
+  /* padding-left: 40rpx; */
+  align-items: center;
   flex-wrap: wrap;
+  /* flex-direction: column; */
 }
 .select-btn{
-  width: 27%;
-  height: 80rpx;
-  line-height: 80rpx;
+  width: 33.33%;
+  /* height: 80rpx; */
+  /* line-height: 80rpx; */
+  text-align: center;
+  /* background: #F6F6F6; */
+  /* margin-right: 40rpx; */
+  /* margin-top: 40rpx; */
+}
+.text-z{
+  margin: 20rpx;
+  padding: 10rpx 0;
+  display: block;
   text-align: center;
   background: #F6F6F6;
-  margin-right: 40rpx;
-  margin-top: 40rpx;
 }
 .active{
   background: #FFF8F8;
   color: #CA191D;
   border: 1rpx solid #CA191D;
+  box-sizing: border-box;
 }
 .bot-btn{
   height: 120rpx;
   background: #F7F7F7;
   display: flex;
   align-items: center;
-  margin-top: 60rpx;
+  margin-top: 30rpx;
   justify-content: space-around;
   padding: 0rpx 130rpx 0 130rpx;
 }
