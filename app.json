@@ -1,9 +1,11 @@
 {
   "pages": [
     "pages/login/login",
+    "pages/hotCategory/hotCategory",
     "pages/index/index",
     "pages/record/record",
     "pages/detail/detail",
+    "pages/payType/payType",
     "pages/index_data/index_data"
   ],
   "window": {

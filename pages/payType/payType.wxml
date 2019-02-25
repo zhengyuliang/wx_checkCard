@@ -1,0 +1,13 @@
+<!--pages/hotCategory/hotCategory.wxml-->
+<view class="containers">
+   <view class="selectDay">
+     <Select prop-array='{{selectArray}}'
+             bind:myget='getDate'
+             countTime='{{countTime}}'
+             >
+      </Select>
+   </view>
+   <view class="payType">
+     <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ec}}"></ec-canvas>
+   </view>
+</view>

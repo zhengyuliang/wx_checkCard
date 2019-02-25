@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "支付占比",
+  "usingComponents": {
+    "ec-canvas": "../../ec-canvas/ec-canvas"
+  }
+}

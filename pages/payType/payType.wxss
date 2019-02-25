@@ -1,0 +1,19 @@
+/* pages/hotCategory/hotCategory.wxss */
+.containers{
+  display: flex;
+  flex-direction: column;
+}
+.payType{
+  position: absolute;
+  top:200rpx;
+  left:0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+ec-canvas{
+  width:100%;
+  height: 300px;
+}
