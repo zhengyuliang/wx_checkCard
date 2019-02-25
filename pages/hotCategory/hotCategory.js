@@ -2,61 +2,6 @@
 import * as echarts from '../../ec-canvas/echarts';
 const app = getApp()
 
-function initChart(canvas,width,height) {
-  const chart = echarts.init(canvas,null,{
-    width:width,
-    height:height
-  });
-  canvas.setChart(chart);
-  var option = {
-    color: ['#FFB6C1', '#DC143C','#FF00FF'],
-    legend: {
-      data: ['A','B','C'],
-      top: 20,
-      left: 'center',
-      z:100
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap:false,
-      data: ['周一','周二','周三','周四','周五','周六','周六']
-    },
-    yAxis: {
-      x:'center',
-      type: 'value',
-      splitLine: {
-        lineStyle:{
-          type:'solid'
-        }
-      }
-    },
-    series: [{
-      name: 'A',
-      type: 'line',
-      smooth: true,
-      data: [12,34,56,78,23,45,65]
-    }, {
-        name: 'B',
-        type: 'line',
-        smooth: true,
-        data: [9, 32, 45, 65, 31, 98, 42]
-      }, {
-        name: 'C',
-        type: 'line',
-        smooth: true,
-        data: [16, 54, 36, 98, 63, 25, 35]
-      }]
-  };
-  chart.setOption(option);
-  return chart;
-}
-
 
 Page({
 
@@ -64,18 +9,195 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ec: {
-      onInit: initChart
-    }
-  },
+    changTag: 1, // 1.为销售金额含税 2.为销售数量 3.为购买次数
+    screenHeight: 0, // 设备的高度
+    showNodata: false,
+    productInfoList: [
+      { name: '商品名称1', price: '$21000.00', propertion: 50 },
+      { name: '商品名称2', price: '$21000.00', propertion: 30 },
+      { name: '商品名称3', price: '$21000.00', propertion: 20 },
+      { name: '商品名称4', price: '$21000.00', propertion: 10 },
+      { name: '商品名称5', price: '$21000.00', propertion: 100 },
+      { name: '商品名称6', price: '$21000.00', propertion: 290 },
+      { name: '商品名称7', price: '$21000.00', propertion: 50 },
+      { name: '商品名称8', price: '$21000.00', propertion: 50 },
+      { name: '商品名称9', price: '$21000.00', propertion: 50 },
+      { name: '商品名称10', price: '$21000.00', propertion: 50 },
+      { name: '商品名称11', price: '$21000.00', propertion: 50 },
+      { name: '商品名称12', price: '$21000.00', propertion: 50 },
+      { name: '商品名称13', price: '$21000.00', propertion: 50 },
+      { name: '商品名称14', price: '$21000.00', propertion: 50 },
+      { name: '商品名称15', price: '$21000.00', propertion: 50 },
+      { name: '商品名称16', price: '$21000.00', propertion: 50 },
+      { name: '商品名称17', price: '$21000.00', propertion: 50 },
+      { name: '商品名称18', price: '$21000.00', propertion: 50 },
+      { name: '商品名称19', price: '$21000.00', propertion: 50 },
+      { name: '商品名称10', price: '$21000.00', propertion: 50 },
+      { name: '商品名称21', price: '$21000.00', propertion: 50 },
+      { name: '商品名称22', price: '$21000.00', propertion: 50 },
+      { name: '商品名称23', price: '$21000.00', propertion: 50 },
+      { name: '商品名称24', price: '$21000.00', propertion: 50 }
 
+    ] //商品信息
+  },
+  // 切换nav展示不同的数据
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          screenHeight: res.windowHeight - 145
+        })
+        console.log(res.windowHeight,'高度')
+      }
+    })
+    // 获取热销商品数据
+    that.getHotprodata()
   },
-
+  changeTag(e) {
+    var that = this;
+    var type = e.currentTarget.dataset.type;
+    that.setData({
+      changTag: +type
+    })
+    if (that.data.productInfoList.length !== 0) {
+      that.setData({
+        showNodata: false
+      })
+      if (+type === 1) {
+        console.log(1)
+        that.setData({
+          productInfoList: [
+            { name: '商品名称1', price: '$21000.00', propertion: 50 },
+            { name: '商品名称2', price: '$21000.00', propertion: 30 },
+            { name: '商品名称3', price: '$21000.00', propertion: 20 },
+            { name: '商品名称4', price: '$21000.00', propertion: 10 },
+            { name: '商品名称5', price: '$21000.00', propertion: 100 },
+            { name: '商品名称6', price: '$21000.00', propertion: 290 },
+            { name: '商品名称7', price: '$21000.00', propertion: 50 },
+            { name: '商品名称8', price: '$21000.00', propertion: 50 },
+            { name: '商品名称9', price: '$21000.00', propertion: 50 },
+            { name: '商品名称10', price: '$21000.00', propertion: 50 },
+            { name: '商品名称11', price: '$21000.00', propertion: 50 },
+            { name: '商品名称12', price: '$21000.00', propertion: 50 },
+            { name: '商品名称13', price: '$21000.00', propertion: 50 },
+            { name: '商品名称14', price: '$21000.00', propertion: 50 },
+            { name: '商品名称15', price: '$21000.00', propertion: 50 },
+            { name: '商品名称16', price: '$21000.00', propertion: 50 },
+            { name: '商品名称17', price: '$21000.00', propertion: 50 },
+            { name: '商品名称18', price: '$21000.00', propertion: 50 },
+            { name: '商品名称19', price: '$21000.00', propertion: 50 },
+            { name: '商品名称10', price: '$21000.00', propertion: 50 },
+            { name: '商品名称21', price: '$21000.00', propertion: 50 },
+            { name: '商品名称22', price: '$21000.00', propertion: 50 },
+            { name: '商品名称23', price: '$21000.00', propertion: 50 },
+            { name: '商品名称24', price: '$21000.00', propertion: 50 }
+          ]
+        })
+      } else if (+type === 2) {
+        console.log(2)
+        that.setData({
+          productInfoList: [
+            { name: '商品名称1', price: '100件', propertion: 50 },
+            { name: '商品名称2', price: '100件', propertion: 30 },
+            { name: '商品名称3', price: '100件', propertion: 20 },
+            { name: '商品名称4', price: '100件', propertion: 10 },
+            { name: '商品名称5', price: '100件', propertion: 100 },
+            { name: '商品名称6', price: '100件', propertion: 290 },
+            { name: '商品名称7', price: '100件', propertion: 50 },
+            { name: '商品名称8', price: '100件', propertion: 50 },
+            { name: '商品名称9', price: '100件', propertion: 50 },
+            { name: '商品名称10', price: '100件', propertion: 50 },
+            { name: '商品名称11', price: '100件', propertion: 50 },
+            { name: '商品名称12', price: '100件', propertion: 50 },
+            { name: '商品名称13', price: '100件', propertion: 50 },
+            { name: '商品名称14', price: '100件', propertion: 50 },
+            { name: '商品名称15', price: '100件', propertion: 50 },
+            { name: '商品名称16', price: '100件', propertion: 50 },
+            { name: '商品名称17', price: '100件', propertion: 50 },
+            { name: '商品名称18', price: '100件', propertion: 50 },
+            { name: '商品名称19', price: '100件', propertion: 50 },
+            { name: '商品名称10', price: '100件', propertion: 50 },
+            { name: '商品名称21', price: '100件', propertion: 50 },
+            { name: '商品名称22', price: '100件', propertion: 50 },
+            { name: '商品名称23', price: '100件', propertion: 50 },
+            { name: '商品名称24', price: '100件', propertion: 50 }
+          ]
+        })
+      } else {
+        console.log(3)
+        that.setData({
+          productInfoList: [
+            { name: '商品名称1', price: '50次', propertion: 50 },
+            { name: '商品名称2', price: '50次', propertion: 30 },
+            { name: '商品名称3', price: '50次', propertion: 20 },
+            { name: '商品名称4', price: '50次', propertion: 10 },
+            { name: '商品名称5', price: '50次', propertion: 100 },
+            { name: '商品名称6', price: '50次', propertion: 290 },
+            { name: '商品名称7', price: '50次', propertion: 50 },
+            { name: '商品名称8', price: '50次', propertion: 50 },
+            { name: '商品名称9', price: '50次', propertion: 50 },
+            { name: '商品名称10', price: '50次', propertion: 50 },
+            { name: '商品名称11', price: '50次', propertion: 50 },
+            { name: '商品名称12', price: '50次', propertion: 50 },
+            { name: '商品名称13', price: '50次', propertion: 50 },
+            { name: '商品名称14', price: '50次', propertion: 50 },
+            { name: '商品名称15', price: '50次', propertion: 50 },
+            { name: '商品名称16', price: '50次', propertion: 50 },
+            { name: '商品名称17', price: '50次', propertion: 50 },
+            { name: '商品名称18', price: '50次', propertion: 50 },
+            { name: '商品名称19', price: '50次', propertion: 50 },
+            { name: '商品名称10', price: '50次', propertion: 50 },
+            { name: '商品名称21', price: '50次', propertion: 50 },
+            { name: '商品名称22', price: '50次', propertion: 50 },
+            { name: '商品名称23', price: '50次', propertion: 50 },
+            { name: '商品名称24', price: '50次', propertion: 50 }
+          ]
+        })
+      }
+    } else {
+      that.setData({
+        showNodata: true
+      })
+    }
+  },
+  // 获取热销商品数据
+  getHotprodata () {
+      let params = {
+        "start_time": "2019-02-01 00:00:00",
+        "end_time": "2019-02-25 17:47:17",
+        "store_id": 0,
+        "ranking_by": 1,
+        "is_desc": 1,
+        "org_id": 2,
+        "top_n": 100
+      }
+      wx.request({
+        url: 'https://a95oyxv7s6.execute-api.cn-northwest-1.amazonaws.com.cn/proc/report/usmile/ranking/sales-test',
+        method: 'POST',
+        data: params,
+        // config: {
+        header: {
+          'x-api-key': 'XpF1tKUX0CatqWK6uH9UU1CkZ1TNUwnN5USWT1ka'
+        },
+        // },
+        success: function (msg) {
+          console.log(msg, 'msgmsg')
+        },
+        fail: function (err) { }
+      })
+  },
+  // 加载更多信息
+  bindscrolltolowers () {},
+  // 选择时间
+  getDate (e) {
+    console.log(e.detail.text)
+  },
+  // 格式化时间
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

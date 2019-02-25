@@ -1,7 +1,7 @@
 <!--pages/hotCategory/hotCategory.wxml-->
 <view class="containers">
    <view class="selectDay">
-     <Select prop-array='{{selectArray}}'
+      <Select prop-array='{{selectArray}}'
              bind:myget='getDate'
              countTime='{{countTime}}'
              >

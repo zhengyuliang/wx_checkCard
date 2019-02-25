@@ -4,6 +4,16 @@ Component({
       // 这里定义了innerText属性，属性值可以在组件使用时指定
       propArray: {
         type: Array,
+        value: [{
+          "id": 0,
+          "text": "近7天"
+        }, {
+          "id": 1,
+          "text": "近15天"
+        }, {
+          "id": 2,
+          "text": "近30天"
+        }]
       },
       innerText: {
         type: String,

@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "支付占比",
+  "navigationBarTitleText": "热销商品",
   "usingComponents": {
-    "ec-canvas": "../../ec-canvas/ec-canvas"
+    "Select": "/component/select/select"
   }
 }
