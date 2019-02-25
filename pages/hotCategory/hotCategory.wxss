@@ -1,0 +1,15 @@
+/* pages/hotCategory/hotCategory.wxss */
+.container{
+  position: absolute;
+  top:0;
+  left:0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+ec-canvas{
+  width:100%;
+  height: 300px;
+}
