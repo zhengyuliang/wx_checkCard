@@ -62,5 +62,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  shopSelect:function(){
+    let _that = this;
+    wx.navigateTo({
+      url:'../shop_select/shop_select'
+    })
   }
 })

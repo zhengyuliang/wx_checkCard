@@ -6,7 +6,8 @@
     "pages/record/record",
     "pages/detail/detail",
     "pages/payType/payType",
-    "pages/index_data/index_data"
+    "pages/index_data/index_data",
+    "pages/shop_select/shop_select"
   ],
   "window": {
     "backgroundTextStyle": "light",
