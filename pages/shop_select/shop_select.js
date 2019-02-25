@@ -21,14 +21,23 @@ Page({
       id: 4,
       name: '昆仑好客鸟巢店'
     }],
-    current: '全部店铺',
+    current: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+     let _that = this;
+     wx.getStorage({
+       key: 'shopInfo',
+       success: function(res) {
+         console.log(res);
+         _that.setData({
+           current:res.data.name
+         })
+       },
+     })
   },
 
   /**
@@ -39,15 +48,40 @@ Page({
   },
 
   handleFruitChange({ detail = {} }){
+    let _that = this;
     console.log('detail>',detail);
-    this.setData({
+    _that.setData({
       current: detail.value
     });
+    _that.shopSelectData(detail.value);
+  },
+
+  /**
+   * 获取店铺列表信息
+   */
+  getShopListInfo:function(){
+    let _that = this;
+    
   },
 
   /**
    * 获得店铺内容
    */
+  shopSelectData:function(data){
+    let _that = this;
+    let dataR = _that.data.shopList.filter(item => {
+      return item.name = data;
+    })
+    wx.setStorage({
+      key: 'shopInfo',
+      data: dataR[0],
+      success:function(res){
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面显示

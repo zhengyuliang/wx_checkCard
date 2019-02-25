@@ -22,7 +22,7 @@ page{
   justify-content: flex-start;
   align-items: center;
   padding: 20rpx;
-  border-bottom: 1rpx solid #ccc;
+  border-bottom: 1rpx solid #ececec;
   font-size: 28rpx;
 }
 .item{
@@ -46,7 +46,7 @@ page{
   height: 60rpx;
 }
 .f-body{
-  padding: 20rpx;
+  padding: 20rpx 20rpx 60rpx;
 }
 .list-echart{
   height: 360rpx;
