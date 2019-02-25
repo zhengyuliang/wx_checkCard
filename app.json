@@ -1,13 +1,15 @@
 {
-  "pages":[
+  "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/record/record",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/index_data/index_data"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#CD2E2E",
-    "navigationBarTitleText": "惠智付核销",
-    "navigationBarTextStyle":"white"
+    "navigationBarTitleText": "昆仑好客",
+    "navigationBarTextStyle": "white"
   }
 }

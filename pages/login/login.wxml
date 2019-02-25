@@ -1,0 +1,7 @@
+<!--pages/login/login.wxml-->
+<view class='user'>
+  <image src='/images/logo.png' mode='aspectFit' class='img'></image>
+  <view class='text'>该小程序由微支付开发,向其提供以下权限即可继续操作</view>
+  <view class='info'>获取您的公开信息（昵称、头像等）</view>
+  <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权微信登录</button>
+</view>
