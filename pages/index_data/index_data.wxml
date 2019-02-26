@@ -1,2 +1,49 @@
 <!--pages/index_data/index_data.wxml-->
-<view>首页</view>
+<view class='f nav'>
+  <view class='shop_name'>店铺：昆仑好客恒毅B1层体验店</view>
+  <view class='shop_select' bindtap='shopSelect'>选择店铺</view>
+</view>
+<view class='body'>
+  <view class='f-b'><image class='img-icon' mode='aspectFill' src='../../images/shuju1.png'></image>今日销售额</view>
+  <view class='f f-body'>
+    <view class='item'>
+      <view class='price-red'>￥122.02</view>
+      <view class='price-title'>日销售额(含税)</view>
+    </view>
+    <view class='item'>
+      <view class='price-red'>￥122.02</view>
+      <view class='price-title'>日销售额(不含税)</view>
+    </view>
+    <view class='item'>
+      <view class='price-red'>10次</view>
+      <view class='price-title'>购买次数(订单量)</view>
+    </view>
+  </view>
+</view>
+<view class='body'>
+  <view class='f-b'><image class='img-icon' mode='aspectFill' src='../../images/rexiao.png'></image>本店近期销售趋势</view>
+  <view class='list-echart'>
+   图标
+  </view>
+</view>
+<view class='body'>
+  <view class='f-b'><image class='img-icon' mode='aspectFill' src='../../images/shop.png'></image>店铺经营经营数据可视化</view>
+  <view class='f-w f-body'>
+    <view class='item item-t'>
+      <image class='img' mode='aspectFill' src='../../images/hot.png'></image>
+      <view class='price-title'>热销商品排行</view>
+    </view>
+    <view class='item item-t'>
+      <image class='img' mode='aspectFill' src='../../images/pay.png'></image>
+      <view class='price-title'>支付类型占比</view>
+    </view>
+    <view class='item item-t'>
+      <image class='img' mode='aspectFill' src='../../images/TOP6.png'></image>
+      <view class='price-title'>热销品类</view>
+    </view>
+    <view class='item item-t'>
+      <image class='img' mode='aspectFill' src='../../images/sale.png'></image>
+      <view class='price-title'>滞销商品排行</view>
+    </view>
+  </view>
+</view>

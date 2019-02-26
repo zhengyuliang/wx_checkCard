@@ -1,0 +1,7 @@
+<!--pages/shop_select/shop_select.wxml-->
+<!-- <i-panel title="group-水果"> -->
+  <i-radio-group current="{{current}}" bindchange="handleFruitChange" >
+    <i-radio wx:for="{{shopList}}" position="right" wx:key="{{item.id}}" value='{{item.name}}' data-index = "{{item.id}}">
+    </i-radio>
+  </i-radio-group>
+<!-- </i-panel> -->
