@@ -1,5 +1,6 @@
 /* pages/hotCategory/hotCategory.wxss */
 .containers{
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -80,11 +81,57 @@
   height:15rpx;
   border-radius: 0 8rpx 8rpx 0;
 }
-.mainInfo{
-  margin-top: 30rpx;
-}
 .loadMore{
+  width: 100%;
   color: #ccc;
   text-align: center;
   font-size: 28rpx;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0;
+  background: #fff;
+  height: 100rpx;
+  line-height: 100rpx;
+  
+}
+.mainInfo-wrap {
+  display:flex;
+flex-direction:column;
+height:auto;
+position:absolute;
+width:100%;
+left:0;
+right:0;
+bottom:0;
+top:0;
+margin:auto;
+margin-top:196rpx;
+margin-bottom: 100rpx;
+  
+}
+.mainInfo {
+  /* flex: 1;
+  position: relative; */
+  overflow-x:hidden;
+  overflow-y:auto;
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.mainInfo .pp{
+  /* overflow-x:hidden;
+  overflow-y:auto;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0; */
+}
+
+.top-wrap{
+  position: relative;
+  z-index: 99;
+  background: #fff;
 }

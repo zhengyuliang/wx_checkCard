@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/payType/payType",
-    "pages/hotCategory/hotCategory",
+    "pages/hotCategory/hotCategory",   
     "pages/login/login",
     "pages/index/index",
     "pages/record/record",
