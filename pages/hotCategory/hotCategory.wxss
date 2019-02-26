@@ -39,7 +39,7 @@
   font-size: 26rpx;
   padding-left: 15rpx;
   box-sizing: border-box;
-  height: 100rpx;
+  height: 105rpx;
 }
 .left{
   width: 8%;

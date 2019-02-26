@@ -37,6 +37,7 @@ App({
     userInfo: '',
     /**测试环境 */
     shopURL: 'http://test-swagger.esmart365.com:5015', //店铺 Contact 刘益
+    payTypeURL: 'http://test-swagger.esmart365.com:5014', //支付类型
     org_id: 3, //组织ID
 
     /**生产环境 */

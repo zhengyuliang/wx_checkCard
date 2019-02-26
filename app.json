@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/payType/payType",
     "pages/hotCategory/hotCategory",
     "pages/login/login",
     "pages/index/index",
     "pages/record/record",
-    "pages/payType/payType",
     "pages/detail/detail",
     "pages/index_data/index_data",
     "pages/shop_select/shop_select"
