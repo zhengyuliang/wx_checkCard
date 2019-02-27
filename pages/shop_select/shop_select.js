@@ -28,7 +28,7 @@ Page({
        success: function(res) {
          console.log(res);
          _that.setData({
-           current:res.data.name
+           current: res.data.shop_name
          })
        },
      })
@@ -64,7 +64,7 @@ Page({
   shopSelectData:function(data){
     let _that = this;
     let dataR = _that.data.shopList.filter(item => {
-      return item.name = data;
+      return item.shop_name = data;
     })
     wx.setStorage({
       key: 'shopInfo',

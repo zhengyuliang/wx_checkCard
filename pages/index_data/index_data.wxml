@@ -1,6 +1,6 @@
 <!--pages/index_data/index_data.wxml-->
 <view class='f nav'>
-  <view class='shop_name'>店铺：昆仑好客恒毅B1层体验店</view>
+  <view class='shop_name'>店铺：{{shopInfo.shop_name}}</view>
   <view class='shop_select' bindtap='shopSelect'>选择店铺</view>
 </view>
 <view class='body'>
@@ -20,7 +20,7 @@
     </view>
   </view>
 </view>
-<view class='body'>
+<view class='body'> 
   <view class='f-b'><image class='img-icon' mode='aspectFill' src='../../images/rexiao.png'></image>本店近期销售趋势</view>
   <view class='list-echart'>
    <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ec}}"></ec-canvas>
@@ -37,10 +37,10 @@
       <image class='img' mode='aspectFill' src='../../images/pay.png'></image>
       <view class='price-title'>支付类型占比</view>
     </view>
-    <view class='item item-t'>
+    <!-- <view class='item item-t'>
       <image class='img' mode='aspectFill' src='../../images/TOP6.png'></image>
       <view class='price-title'>热销品类</view>
-    </view>
+    </view> -->
     <view class='item item-t' bindtap='gosalable'>
       <image class='img' mode='aspectFill' src='../../images/sale.png'></image>
       <view class='price-title'>滞销商品排行</view>

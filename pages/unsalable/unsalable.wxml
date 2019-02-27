@@ -26,7 +26,7 @@
       <view class='mainInfo-wrap'>
        <view  class="mainInfo" >
             <view wx:if="{{showNodata}}">暂无热销商品数据</view>
-            <view wx:if="{{!showNodata && index < ind}}" class="allInfo"  wx:for="{{productInfoList}}">
+            <view wx:if="{{!showNodata && index < ind}}" class="allInfo"  wx:for="{{productInfoList}}" wx:key="{{index}}">
               <view class="left">
                 <view class="count">{{index+1}}</view>
               </view>
