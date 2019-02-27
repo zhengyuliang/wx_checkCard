@@ -39,9 +39,12 @@ App({
     shopURL: 'http://test-swagger.esmart365.com:5015', //店铺 Contact 刘益
     org_id: 3, //组织ID
 
+    /**演示环境 */
+    // shopURL: '', //店铺 Contact 刘益
+
     /**生产环境 */
     // shopURL: '', //店铺 Contact 刘益
-    // org_id: 3, //组织ID
+    
 
     member_access_token: "YsfrkQGy21BCIvP2aLlqVZjHz9lpLaDfsKldpUmFGEsXRhx4ycd5uOBPS42cm3Yu",
     member_token_type: "member",
