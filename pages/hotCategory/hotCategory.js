@@ -92,9 +92,11 @@ Page({
           'x-api-key': 'XpF1tKUX0CatqWK6uH9UU1CkZ1TNUwnN5USWT1ka'
         },
         success: function (res) {
+          
           if (res.statusCode === 200) {
             wx.hideLoading({});
-            let msg = JSON.parse(res.data)
+            let msg = JSON.parse(res.data);
+            console.log("热销返回的数据>>>", msg);
             // let arr = []
             let max = 0
             if (msg[1]) {
