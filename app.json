@@ -1,12 +1,13 @@
 {
   "pages": [
-    "pages/login/login",
+    "pages/index_data/index_data",
+    "pages/unsalable/unsalable",
     "pages/hotCategory/hotCategory",
+    "pages/payType/payType",
+    "pages/login/login",
     "pages/index/index",
     "pages/record/record",
     "pages/detail/detail",
-    "pages/payType/payType",
-    "pages/index_data/index_data",
     "pages/shop_select/shop_select"
   ],
   "window": {
