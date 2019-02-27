@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "滞销商品",
+  "usingComponents": {
+    "Select": "/component/select/select"
+  }
+}

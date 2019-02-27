@@ -16,7 +16,7 @@ Page({
     endTime: '', //结束时间
     page: 1,
     arr: [],
-    ind:9,// 索引
+    ind: 9,// 索引
     productInfoList: [] //商品信息
   },
   // 切换nav展示不同的数据
@@ -30,10 +30,10 @@ Page({
     m = m < 10 ? '0' + m : m;
     let d = date1.getDate();
     d = d < 10 ? ('0' + d) : d;
-    return y + '-' + m + '-' + d 
+    return y + '-' + m + '-' + d
   },
   // 前几天
-  behindDay (n) {
+  behindDay(n) {
     let that = this;
     let d = new Date()
     return that.formatter(new Date(new Date(that.formatter(d) + ' ' + '23:59:59').getTime() - 86400000 * n)) + ' ' + '23:59:59'
@@ -45,7 +45,7 @@ Page({
       endTime: that.behindDay(1)
     })
     // 获取热销商品数据
-    that.getHotprodata(that.data.startTime,that.data.endTime,that.data.changTag)
+    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag)
   },
   changeTags(e) {
     var that = this;
@@ -60,92 +60,96 @@ Page({
     that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag)
   },
   // 获取热销商品数据
-  getHotprodata (startTime,endTime,type) {
+  getHotprodata(startTime, endTime, type) {
     var that = this
     that.data.arr = []
     let url = app.globalData.hotunsalableURL;
     wx.showLoading({
       mask: true
     })
-      let params = {
-        "start_time": startTime,
-        "end_time": endTime,
-        "store_id": 0,
-        "ranking_by": type,  //1销售金额 2销售数量 3订单量
-        "is_desc": 1,  //1热销 0滞销
-        "org_id": 2, //组织id
-        "top_n": 100
-      }
-      wx.request({
-        url: url,
-        method: 'POST',
-        data: params,
-        header: {
-          'x-api-key': 'XpF1tKUX0CatqWK6uH9UU1CkZ1TNUwnN5USWT1ka'
-        },
-        success: function (res) {
-          if (res.statusCode === 200) {
-            wx.hideLoading({});
-            let msg = JSON.parse(res.data)
-            // let arr = []
-            let max = 0
-            if (msg[1]) {
-              // 有数据
-              for (let i in msg) {  
-                if (that.data.changTag === 1) {
-                  max = msg[1].amount
-                  msg[i].propertion = msg[i].amount /max * 100 + '%'
-                
-                  that.data.arr.push({
-                    name: msg[i].name,
-                    rightInfo: '￥'+msg[i].amount,
-                    propertion: msg[i].propertion
-                  })
-                } else if (that.data.changTag === 2) {
-                  max = msg[1].count
-                  msg[i].propertion = msg[i].count / max * 100 + '%'
-                  that.data.arr.push({
-                    name: msg[i].name,
-                    rightInfo: msg[i].count + '件',
-                    propertion: msg[i].propertion
-                  })
-                } else {
-                  max = msg[1].order_number
-                  msg[i].propertion = msg[i].order_number / max * 100 + '%'
-                  that.data.arr.push({
-                    name: msg[i].name,
-                    rightInfo: msg[i].order_number + '次',
-                    propertion: msg[i].propertion
-                  })
-                }
-              }
-              that.setData({
-                productInfoList: that.data.arr
-              })
-               
-            } else {
-              // 没有数据
-              that.setData({
-                showNodata: true
-              })
+    let params = {
+      "start_time": startTime,
+      "end_time": endTime,
+      "store_id": 0,
+      "ranking_by": type,  //1销售金额 2销售数量 3订单量
+      "is_desc": 0,  //1热销 0滞销
+      "org_id": 2, //组织id
+      "top_n": 100
+    }
+    wx.request({
+      url: url,
+      method: 'POST',
+      data: params,
+      header: {
+        'x-api-key': 'XpF1tKUX0CatqWK6uH9UU1CkZ1TNUwnN5USWT1ka'
+      },
+      success: function (res) {
+        if (res.statusCode === 200) {
+          wx.hideLoading({});
+          let msg = JSON.parse(res.data)
+          let arr = []
+          let max = 0
+          if (msg[1]) {
+            // 有数据
+            for(let j in msg){
+              arr.push({name:msg[j].name})
             }
+            for (let i in msg) {
+              if (that.data.changTag === 1) {
+                max = msg[arr.length].amount
+                msg[i].propertion = msg[i].amount / max * 100 + '%'
+                that.data.arr.push({
+                  name: msg[i].name,
+                  rightInfo: '￥' + msg[i].amount,
+                  propertion: msg[i].propertion
+                })
+            
+                console.log(msg[that.data.arr.length].amount)
+              } else if (that.data.changTag === 2) {
+                max = msg[arr.length].count
+                msg[i].propertion = msg[i].count / max * 100 + '%'
+                that.data.arr.push({
+                  name: msg[i].name,
+                  rightInfo: msg[i].count + '件',
+                  propertion: msg[i].propertion
+                })
+              } else {
+                max = msg[arr.length].order_number
+                msg[i].propertion = msg[i].order_number / max * 100 + '%'
+                that.data.arr.push({
+                  name: msg[i].name,
+                  rightInfo: msg[i].order_number + '次',
+                  propertion: msg[i].propertion
+                })
+              }
+            }
+            that.setData({
+              productInfoList: that.data.arr
+            })
+
+          } else {
+            // 没有数据
+            that.setData({
+              showNodata: true
+            })
           }
-        },
-        fail: function (err) { }
-      })
+        }
+      },
+      fail: function (err) { }
+    })
   },
   // 点击加载更多
-  loadMoredata () {
+  loadMoredata() {
     var that = this;
     that.setData({
-      ind: that.data.ind+9
+      ind: that.data.ind + 9
     })
     // let pages = 1
     // that.data.productInfoList.concat(that.data.arr.slice((that.data.page - 1) * 9, that.data.page * 9))
     // that.data.page++
   },
   // 选择时间
-  getDate (e) {
+  getDate(e) {
     var that = this
     that.setData({
       ind: 9

@@ -73,6 +73,27 @@ Page({
       url:'../shop_select/shop_select'
     })
   },
+  // 点击进入热销商品
+  gotoHotprorank(){
+    let _that = this;
+    wx.navigateTo({
+      url: '../hotCategory/hotCategory'
+    })
+  },
+  // 点击进入支付类型占比页
+  gotoPaytype () {
+    let _that = this;
+    wx.navigateTo({
+      url: '../payType/payType'
+    })
+  },
+  // 点击进入滞销商品排行
+  gosalable () {
+    let _that = this;
+    wx.navigateTo({
+      url: '../unsalable/unsalable'
+    })
+  },
   /**
    * 获取店铺列表
    */

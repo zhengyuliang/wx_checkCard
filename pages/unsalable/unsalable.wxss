@@ -1,0 +1,137 @@
+/* pages/hotCategory/hotCategory.wxss */
+.containers{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.navBar{
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  position: relative;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 1rpx solid #ccc;
+}
+.navtitle-active{
+  color: #CD2E2E;
+}
+.line{
+  position: absolute;
+  width: 120rpx;
+  height: 4rpx;
+  background:#CD2E2E;
+  top:78rpx;
+  left:47rpx;
+}
+.line-1{
+  left: 57rpx;
+}
+.line-2{
+  left: 375rpx;
+}
+.line-3{
+  left: 615rpx;
+}
+.allInfo{
+  display: flex;
+  font-size: 26rpx;
+  padding-left: 15rpx;
+  box-sizing: border-box;
+  height: 105rpx;
+}
+.left{
+  width: 8%;
+  margin-top: 15rpx;
+}
+.count{
+  width: 30rpx;
+  height: 30rpx;
+  background: #262626;
+  color: #fff;
+  border-radius: 50%;
+  line-height: 30rpx;
+  text-align: center;
+}
+.right{
+  width: 95%;
+  
+  /* background: yellow; */
+}
+.proInfo{
+  display: flex;
+  justify-content: space-between;
+  padding-right: 15rpx;
+  box-sizing: border-box;
+}
+.percent{
+  width: 98%;
+  height: 15rpx;
+  background: #E9E9E9;
+  margin-top: 10rpx;
+  border-top-right-radius: 8rpx;
+  border-bottom-right-radius: 8rpx;
+  position: relative;
+}
+.propertion{
+  position: absolute;
+  background: linear-gradient(to right, #FF5D51, #FB8F87);
+  height:15rpx;
+  border-radius: 0 8rpx 8rpx 0;
+}
+.loadMore{
+  width: 100%;
+  color: #ccc;
+  text-align: center;
+  font-size: 28rpx;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0;
+  background: #fff;
+  height: 100rpx;
+  line-height: 100rpx;
+  
+}
+.mainInfo-wrap {
+  display:flex;
+flex-direction:column;
+height:auto;
+position:absolute;
+width:100%;
+left:0;
+right:0;
+bottom:0;
+top:0;
+margin:auto;
+margin-top:196rpx;
+margin-bottom: 100rpx;
+  
+}
+.mainInfo {
+  /* flex: 1;
+  position: relative; */
+  overflow-x:hidden;
+  overflow-y:auto;
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.mainInfo .pp{
+  /* overflow-x:hidden;
+  overflow-y:auto;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0; */
+}
+
+.top-wrap{
+  position: relative;
+  z-index: 99;
+  background: #fff;
+}

@@ -29,11 +29,11 @@
 <view class='body'>
   <view class='f-b'><image class='img-icon' mode='aspectFill' src='../../images/shop.png'></image>店铺经营经营数据可视化</view>
   <view class='f-w f-body'>
-    <view class='item item-t'>
+    <view class='item item-t' bindtap='gotoHotprorank'>
       <image class='img' mode='aspectFill' src='../../images/hot.png'></image>
       <view class='price-title'>热销商品排行</view>
     </view>
-    <view class='item item-t'>
+    <view class='item item-t' bindtap='gotoPaytype'>
       <image class='img' mode='aspectFill' src='../../images/pay.png'></image>
       <view class='price-title'>支付类型占比</view>
     </view>
@@ -41,7 +41,7 @@
       <image class='img' mode='aspectFill' src='../../images/TOP6.png'></image>
       <view class='price-title'>热销品类</view>
     </view>
-    <view class='item item-t'>
+    <view class='item item-t' bindtap='gosalable'>
       <image class='img' mode='aspectFill' src='../../images/sale.png'></image>
       <view class='price-title'>滞销商品排行</view>
     </view>

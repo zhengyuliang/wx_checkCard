@@ -57,26 +57,24 @@ Page({
   },
   getDate: function(e) {
     var that = this;
-    // debugger
-    // if (e.detail.id === 0) {
-    //   that.setData({
-    //     startTime: that.behindDay(7).split(' ')[0] + ' ' + '00:00:00',
-    //     endTime: that.behindDay(1)
-    //   })
-    // } else if (e.detail.id === 1) {
-    //   that.setData({
-    //     startTime: that.behindDay(15).split(' ')[0] + ' ' + '00:00:00',
-    //     endTime: that.behindDay(1)
-    //   })
-    // } else {
-    //   that.setData({
-    //     startTime: that.behindDay(30).split(' ')[0] + ' ' + '00:00:00',
-    //     endTime: that.behindDay(1)
-    //   })
-    // }
+    if (e.detail.id === 0) {
+      that.setData({
+        startTime: that.behindDay(7).split(' ')[0] + ' ' + '00:00:00',
+        endTime: that.behindDay(1)
+      })
+    } else if (e.detail.id === 1) {
+      that.setData({
+        startTime: that.behindDay(15).split(' ')[0] + ' ' + '00:00:00',
+        endTime: that.behindDay(1)
+      })
+    } else {
+      that.setData({
+        startTime: that.behindDay(30).split(' ')[0] + ' ' + '00:00:00',
+        endTime: that.behindDay(1)
+      })
+    }
     console.log(payList,'获取的接口数据')
-    // that.getPaytypedata(that.data.startTime, that.data.endTime)
-    that.getPaytypedata("2019-01-27 00:00:00",'2019-02-25 23:59:59')
+    that.getPaytypedata(that.data.startTime, that.data.endTime)
   },
   // 数据格式化
   formatter(date1) {
@@ -95,7 +93,6 @@ Page({
   },
   // 获取支付类型的数据
   getPaytypedata (startTime,endTime) {
-    
     payList = []
     let that = this;
     let url = app.globalData.payTypeURL;
@@ -140,11 +137,11 @@ Page({
             payList = arr
             that.data.brr = arr
             allData = alipay + wechat + cash + other
-            if (!Chart) {
+            // if (!Chart) {
               that.init_echarts(); //初始化图表
-            } else {
-              that.setOption(Chart); //更新数据
-            }
+            // } else {
+              // that.setOption(Chart); //更新数据
+            // }
           }
           
         }
@@ -175,7 +172,7 @@ Page({
       color: ['#FFB6C1', '#DC143C','yellow','purple'],
       tooltip: {
         trigger: 'item',
-        formatter: "{a} <br/>{b}: {c} ({d}%)"
+        formatter: "{a} {b}: {c} ({d}%)"
       },
       legend: {
         orient: 'vertical',
@@ -185,7 +182,7 @@ Page({
       },
       series: [
         {
-          name: '访问来源',
+          name: '类型',
           type: 'pie',
           radius: ['30%', '70%'],
           data: payList
