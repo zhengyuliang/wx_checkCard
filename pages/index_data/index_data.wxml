@@ -23,7 +23,7 @@
 <view class='body'>
   <view class='f-b'><image class='img-icon' mode='aspectFill' src='../../images/rexiao.png'></image>本店近期销售趋势</view>
   <view class='list-echart'>
-   图标
+   <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ec}}"></ec-canvas>
   </view>
 </view>
 <view class='body'>

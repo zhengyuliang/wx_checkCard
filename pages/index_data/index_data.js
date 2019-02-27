@@ -8,6 +8,7 @@ Page({
   data: {
     shopID:{},
     shopInfo:'',
+    shopList:[],//店铺列表内容
     dataInfo:''
   },
 
@@ -30,7 +31,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let _that = this;
+    wx.getStorage({
+      key: 'shopInfo',
+      success: function (res) {
+        console.log(res);
+        if(res){
+          _that.setData({
+            shopInfo: res.data
+          })
+        }else{
+          _that.setData({
+            shopInfo: res.data
+          })
+        }
+        
+       
+      },
+    })
   },
 
   /**
@@ -112,6 +130,17 @@ Page({
       },
       success:function(msg){
         console.log('msg>>>>>',msg);
+        let data = msg.data;
+        _that.setData({
+          shopList:data.data
+        })
+        wx.setStorage({
+          key: 'shopList',
+          data: data.data,
+          success: function (res) {
+           console.log("存储店铺内容");
+          }
+        })
       }
     })
 

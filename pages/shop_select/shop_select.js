@@ -5,22 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    shopList: [{
-      id: 0,
-      name: '全部店铺'
-    }, {
-      id: 1,
-      name: '昆仑好客恒毅B1层体验店'
-    }, {
-      id: 2,
-      name: '昆仑好客东直门店'
-    }, {
-      id: 3,
-      name: '昆仑好客东直门店2'
-    }, {
-      id: 4,
-      name: '昆仑好客鸟巢店'
-    }],
+    shopList: [],
     current: '',
   },
 
@@ -29,6 +14,15 @@ Page({
    */
   onLoad: function(options) {
      let _that = this;
+    wx.getStorage({
+      key: 'shopList',
+      success: function (res) {
+        console.log(res);
+        _that.setData({
+          shopList: res.data
+        })
+      },
+    })
      wx.getStorage({
        key: 'shopInfo',
        success: function(res) {
