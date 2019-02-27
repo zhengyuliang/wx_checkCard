@@ -1,46 +1,9 @@
 // pages/hotCategory/hotCategory.js
 import * as echarts from '../../ec-canvas/echarts';
 const app = getApp()
-let payList = [
-  // { value: 335, name: '支付宝' },
-  // { value: 310, name: '现金' },
-  // { value: 234, name: '微信' },
-  // { value: 135, name: '其他' }
-]
+let payList = []
 let allData = 0
 var Chart = null
-
-// function initChart(canvas,width,height) {
-//   const chart = echarts.init(canvas,null,{
-//     width:width,
-//     height:height
-//   });
-//   canvas.setChart(chart);
-//   var option = {
-//     color: ['#FFB6C1', '#DC143C','yellow','purple'],
-//     tooltip: {
-//       trigger: 'item',
-//       formatter: "{a} <br/>{b}: {c} ({d}%)"
-//     },
-//     legend: {
-//       orient: 'vertical',
-//       // x: 'left',
-//       top: '90%',
-//       data: ['支付宝', '现金', '微信', '其他']
-//     },
-//     series: [
-//       {
-//         name: '访问来源',
-//         type: 'pie',
-//         radius: ['30%', '70%'],
-//         data: payList
-//       }
-//     ]
-//   };
-//   chart.setOption(option);
-//   return chart;
-// }
-
 
 Page({
 
@@ -53,7 +16,8 @@ Page({
       lazyLoad: true // 延迟加载
     },
     startTime: '', //开始时间
-    endTime: '' //结束时间
+    endTime: '', //结束时间
+    nodata: false
   },
   getDate: function(e) {
     var that = this;
@@ -97,6 +61,10 @@ Page({
     let that = this;
     let url = app.globalData.payTypeURL;
     let org_id = app.globalData.org_id;
+    wx.showLoading({
+      title: '数据加载中',
+      mask: true
+    })
     wx.request({
       url: url + '/v1/reports/sales_reports',
       method: 'POST',
@@ -115,6 +83,7 @@ Page({
       },
       success: function (res) {
         if (res.statusCode === 200) {
+          wx.hideLoading()
           let msg = res.data
           let alipay = 0
           let wechat = 0
@@ -129,19 +98,23 @@ Page({
               other += item.other
             })
             arr = [
-              { value: alipay, name: '支付宝' },
-              { value: wechat, name: '微信' },
-              { value: cash, name: '现金' },
-              { value: other, name: '其他' }
+              { value: parseFloat(alipay).toFixed(2), name: '支付宝' },
+              { value: parseFloat(wechat).toFixed(2), name: '微信' },
+              { value: parseFloat(cash).toFixed(2), name: '现金' },
+              { value: parseFloat(other).toFixed(2), name: '其他' }
             ]
             payList = arr
             that.data.brr = arr
-            allData = alipay + wechat + cash + other
+            allData = parseFloat(alipay + wechat + cash + other).toFixed(2)
             // if (!Chart) {
               that.init_echarts(); //初始化图表
             // } else {
               // that.setOption(Chart); //更新数据
             // }
+          } else {
+            that.setData({
+              nodata: true
+            })
           }
           
         }
@@ -169,10 +142,11 @@ Page({
   getOption: function () {
     // 指定图表的配置项和数据
     var option = {
-      color: ['#FFB6C1', '#DC143C','yellow','purple'],
+      color: ['#0090FF', '#00C5C3', '#00C64C', '#FFCB00'],
       tooltip: {
         trigger: 'item',
-        formatter: "{a} {b}: {c} ({d}%)"
+        confine: true,
+        position: ['50%', '50%']
       },
       legend: {
         orient: 'vertical',
@@ -184,8 +158,15 @@ Page({
         {
           name: '类型',
           type: 'pie',
-          radius: ['30%', '70%'],
-          data: payList
+          radius: ['0%', '55%'],
+          data: payList,
+          label: {
+            fontSize: 14,
+            formatter: '{b}:{c}({d}%)'
+          },
+          labelLine: {
+            length2: 2
+          }
         }
       ]
     };

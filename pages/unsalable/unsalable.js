@@ -16,7 +16,8 @@ Page({
     endTime: '', //结束时间
     page: 1,
     arr: [],
-    ind: 9,// 索引
+    ind: 20,// 索引
+    showtext: false,
     productInfoList: [] //商品信息
   },
   // 切换nav展示不同的数据
@@ -51,7 +52,7 @@ Page({
     var that = this;
     var type = e.currentTarget.dataset.type;
     that.setData({
-      ind: 9
+      ind: 20
     })
     that.data.arr = []
     that.setData({
@@ -90,9 +91,12 @@ Page({
           let arr = []
           let max = 0
           if (msg[1]) {
+            that.setData({
+              showtext: true
+            })
             // 有数据
-            for(let j in msg){
-              arr.push({name:msg[j].name})
+            for (let j in msg) {
+              arr.push({ name: msg[j].name })
             }
             for (let i in msg) {
               if (that.data.changTag === 1) {
@@ -103,7 +107,7 @@ Page({
                   rightInfo: '￥' + msg[i].amount,
                   propertion: msg[i].propertion
                 })
-            
+
                 console.log(msg[that.data.arr.length].amount)
               } else if (that.data.changTag === 2) {
                 max = msg[arr.length].count
@@ -142,7 +146,7 @@ Page({
   loadMoredata() {
     var that = this;
     that.setData({
-      ind: that.data.ind + 9
+      ind: that.data.ind + 20
     })
     // let pages = 1
     // that.data.productInfoList.concat(that.data.arr.slice((that.data.page - 1) * 9, that.data.page * 9))
@@ -152,7 +156,7 @@ Page({
   getDate(e) {
     var that = this
     that.setData({
-      ind: 9
+      ind: 20
     })
     that.data.arr = []
     if (e.detail.id === 0) {

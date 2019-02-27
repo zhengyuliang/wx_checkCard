@@ -24,21 +24,21 @@
        bindscrolltolower="bindscrolltolowers"
        > -->
       <view class='mainInfo-wrap'>
-       <view  class="mainInfo" >
-            <view wx:if="{{showNodata}}">暂无热销商品数据</view>
-            <view wx:if="{{!showNodata && index < ind}}" class="allInfo"  wx:for="{{productInfoList}}">
-              <view class="left">
-                <view class="count">{{index+1}}</view>
+        <view  class="mainInfo" style="height: {{screenHeight}}px;">
+              <view wx:if="{{showNodata}}" class="nodata">暂无热销商品数据</view>
+              <view wx:if="{{!showNodata && index < ind}}" class="allInfo"  wx:for="{{productInfoList}}">
+                  <view class="left">
+                    <view class="count">{{index+1}}</view>
+                  </view>
+                  <view class="right">
+                    <view class="proInfo"><view>{{item.name}}</view><view>{{item.rightInfo}}</view></view>
+                    <view class="percent"><view class="propertion" style='width:{{item.propertion}}'></view></view>
+                  </view>
               </view>
-              <view class="right">
-                <view class="proInfo"><view>{{item.name}}</view><view>{{item.rightInfo}}</view></view>
-                <view class="percent"><view class="propertion" style='width:{{item.propertion}}'></view></view>
-              </view>
-            </view>
-       </view>
-     </view>
+        </view>
+      </view>
    <!-- </scroll-view> -->
-   <view class="loadMore" bindtap="loadMoredata" style='color:red'>
-     {{ind <= productInfoList.length?'加载更多':'亲是有底线的'}}
-   </view>
+      <view class="loadMore" bindtap="loadMoredata" style='color:red' wx:if="{{showtext}}">
+        {{ind <= productInfoList.length?'加载更多':'亲是有底线的'}}
+      </view>
 </view>

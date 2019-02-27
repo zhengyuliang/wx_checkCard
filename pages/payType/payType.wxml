@@ -6,7 +6,8 @@
              >
       </Select>
    </view>
-   <view class="payType">
+   <view class="payType" wx:if="{{!nodata}}" >
      <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ec}}"></ec-canvas>
    </view>
+   <view wx:if="{{nodata}}" class="nodata">暂无数据</view>
 </view>

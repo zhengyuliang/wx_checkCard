@@ -16,7 +16,8 @@ Page({
     endTime: '', //结束时间
     page: 1,
     arr: [],
-    ind:9,// 索引
+    showtext: false,
+    ind:20,// 索引
     productInfoList: [] //商品信息
   },
   // 切换nav展示不同的数据
@@ -40,6 +41,13 @@ Page({
   },
   onLoad: function (options) {
     var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          screenHeight: res.windowHeight - 80
+        })
+      }
+    })
     that.setData({
       startTime: that.behindDay(7).split(' ')[0] + ' ' + '00:00:00',
       endTime: that.behindDay(1)
@@ -51,7 +59,7 @@ Page({
     var that = this;
     var type = e.currentTarget.dataset.type;
     that.setData({
-      ind: 9
+      ind: 20
     })
     that.data.arr = []
     that.setData({
@@ -91,11 +99,13 @@ Page({
             let max = 0
             if (msg[1]) {
               // 有数据
+              that.setData({
+                showtext: true
+              })
               for (let i in msg) {  
                 if (that.data.changTag === 1) {
                   max = msg[1].amount
                   msg[i].propertion = msg[i].amount /max * 100 + '%'
-                
                   that.data.arr.push({
                     name: msg[i].name,
                     rightInfo: '￥'+msg[i].amount,
@@ -140,15 +150,12 @@ Page({
     that.setData({
       ind: that.data.ind+9
     })
-    // let pages = 1
-    // that.data.productInfoList.concat(that.data.arr.slice((that.data.page - 1) * 9, that.data.page * 9))
-    // that.data.page++
   },
   // 选择时间
   getDate (e) {
     var that = this
     that.setData({
-      ind: 9
+      ind: 20
     })
     that.data.arr = []
     if (e.detail.id === 0) {
