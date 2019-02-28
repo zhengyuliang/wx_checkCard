@@ -24,10 +24,10 @@
 }
 .com-sImg{
     position: absolute;
-    right: 10px;
-    top: 11px;
-    width: 16px;
-    height: 9px;
+    right: 10rpx;
+    top: 0;
+    /* width: 16px; */
+    /* height: 9px; */
     transition: all .3s ease;
 }
 .com-sTxt{

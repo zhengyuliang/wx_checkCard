@@ -1,4 +1,5 @@
 // pages/index_data/index_data.js
+import * as echarts from '../../ec-canvas/echarts';
 let app = getApp();
 Page({
 
@@ -10,7 +11,19 @@ Page({
     shopInfo:'',
     shopList:[],//店铺列表内容
     dataInfo:'',
-    firstData: true //判断是否是第一次加载 
+    firstData: true, //判断是否是第一次加载 
+    propArray: [{"id": 0,"text": "近7天"}, {"id": 1,"text": "近15天"}, {"id": 2,"text": "近30天"}],
+    selectShow:false,//判断隐藏
+    tiemText:'',
+    animationData:{},
+    todaySales:{
+      dailySales:"12.00",
+      dailySalesTac:"10.02",
+      order_quantity:1232
+    },
+    ec:{
+      lazyLoad: true
+    } //图表走势
   },
 
   /**
@@ -18,7 +31,12 @@ Page({
    */
   onLoad: function (options) {
     let _that = this;
+    _that.setData({
+      tiemText:_that.data.propArray[0]
+    })
+    this.ecComponent = this.selectComponent('#mychart-dom-line');
     _that.getShopListData();
+    
   },
 
   /**
@@ -44,37 +62,9 @@ Page({
         }
       })
     }
+    _that.init();
     
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
   /**
    * 用户点击右上角分享
    */
@@ -141,5 +131,154 @@ Page({
         })
       }
     })
-  }
+  },
+  // 时间弹窗
+  selectToggle:function(){
+    let _that = this;
+    let show = _that.data.selectShow;
+    let animation = wx.createAnimation({
+      timingFunction: "ease"
+    })
+    _that.animation = animation;
+    if (show) {
+      animation.rotate(0).step();
+      _that.setData({
+        animationData: animation.export()
+      })
+    } else {
+      animation.rotate(180).step();
+      _that.setData({
+        animationData: animation.export()
+      })
+    }
+    _that.setData({
+      selectShow:!show
+    })
+  },
+  // 选择弹窗
+  setText:function(e){
+    let _that = this;
+    let show = _that.data.selectShow;
+    _that.animation.rotate(0).step();
+    let setletText = e.currentTarget.dataset.index;
+    _that.setData({
+      tiemText: setletText,
+      selectShow: !show,
+      animationData: this.animation.export()
+    })
+  },
+  /**
+   * 获取今日销售额
+   */
+  getSalesTodyData:function(){
+    let _that = this;
+
+  },
+  /**
+   * 获取本店近期销售趋势
+   */
+  getSalesTrendData:function(){
+    let _that = this;
+  },
+  /**
+   * 初始化图表
+   */
+  init:function(){
+    // wx.showLoading({
+    //   title: '加载中',
+    // });
+    this.ecComponent.init((canvas, width, height) => {
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      // this.chart = chart;
+      this.setOption(chart);
+      this.setData({
+        isLoaded: true
+      });
+
+      return chart;
+    })
+    
+  },
+  setOption: function (chart) {
+    chart.clear();  // 清除
+    chart.setOption(this.getOption());  //获取新数据
+  },
+  getOption: function () {
+    // 指定图表的配置项和数据
+    let option = {
+      // title: {
+      //   text: '未来一周气温变化',
+      //   subtext: '纯属虚构'
+      // },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['销售额含税(单位:元)', '购买次数(单位:次)']
+      },
+      // toolbox: {
+      //   show: true,
+      //   feature: {
+      //     mark: { show: true },
+      //     dataView: { show: true, readOnly: false },
+      //     magicType: { show: true, type: ['line', 'bar'] },
+      //     restore: { show: true },
+      //     saveAsImage: { show: true }
+      //   }
+      // },
+      calculable: true,
+      xAxis: [
+        {
+          type: 'category',
+          boundaryGap: false,
+          data: ['2月1日', '2月2日', '2月3日', '2月4日', '2月5日', '2月6日', '2月7日']
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          axisLabel: {
+            formatter: '{value}'
+          }
+        }
+      ],
+      series: [
+        {
+          name: '销售额含税(单位:元)',
+          type: 'line',
+          data: [1001, 1451, 15, 1003, 112, 13, 190],
+          // markPoint: {
+          //   data: [
+          //     { type: 'max', name: '最大值' },
+          //     { type: 'min', name: '最小值' }
+          //   ]
+          // },
+          // markLine: {
+          //   data: [
+          //     { type: 'average', name: '平均值' }
+          //   ]
+          // }
+        },
+        {
+          name: '购买次数(单位:次)',
+          type: 'line',
+          data: [1, 56, 2, 5, 3, 10, 56],
+          // markPoint: {
+          //   data: [
+          //     { name: '周最低', value: -2, xAxis: 1, yAxis: -1.5 }
+          //   ]
+          // },
+          // markLine: {
+          //   data: [
+          //     { type: 'average', name: '平均值' }
+          //   ]
+          // }
+        }
+      ]
+    };
+    return option;
+  },
 })

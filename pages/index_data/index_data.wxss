@@ -35,6 +35,7 @@ page{
 .body{
   margin-top: 20rpx;
   background-color: #fff;
+  position: relative;
 }
 .img-icon{
   width: 30rpx;
@@ -49,7 +50,7 @@ page{
   padding: 20rpx 20rpx 60rpx;
 }
 .list-echart{
-  height: 360rpx;
+  height: 460rpx;
 }
 .price-title{
   font-size: 26rpx;
@@ -69,4 +70,35 @@ page{
   width: 160rpx;
   color: #999;
   text-align: right;
+}
+.selet-time-body{
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  width: 30vw;
+  font-size: 26rpx;
+  color: #999;
+}
+.show-time{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border: 1rpx solid #ececec;
+  padding: 8rpx 10rpx;
+  box-sizing: border-box;
+}
+.show-time-text{
+  flex: 1;
+}
+.com-sList{
+  border-right: 1rpx solid #ececec;
+  border-left: 1rpx solid #ececec;
+  background-color: #fff;
+  position: relative;
+  z-index: 12;
+}
+.com-sItem{
+  border-bottom: 1rpx solid #ececec;
+  padding: 9rpx 10rpx;
 }

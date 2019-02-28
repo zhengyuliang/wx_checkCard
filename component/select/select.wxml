@@ -3,7 +3,8 @@
     <view class='com-selectBox'>
       <view class='com-sContent' bindtap='selectToggle'>
           <view class='com-sTxt'>{{nowText}}</view>
-          <image src='../../images/icon_1.png'  class='com-sImg'  animation="{{animationData}}"></image>
+          <!-- <image src='../../images/icon_1.png'  class='com-sImg'  animation="{{animationData}}"></image> -->
+          <i-icon type="unfold" size="22" color="#80848f" class='com-sImg' animation="{{animationData}}" />
       </view>
       <view class='com-sList' wx:if="{{selectShow}}">
           <view wx:for="{{propArray}}" data-index="{{index}}" wx:key='' class='com-sItem' bindtap='setText'>{{item.text}}</view>
