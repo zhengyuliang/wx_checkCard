@@ -16,10 +16,10 @@ Page({
     endTime: '', //结束时间
     page: 1,
     arr: [],
-    ind: 20,// 索引
     showtext: false,
+    ind: 20,// 索引
     productInfoList: [], //商品信息
-    storeId: '' //店铺id
+    page: 1
   },
   // 切换nav展示不同的数据
   /**
@@ -42,36 +42,34 @@ Page({
   },
   onLoad: function (options) {
     var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          screenHeight: res.windowHeight
+        })
+      }
+    })
     that.setData({
       startTime: that.behindDay(7).split(' ')[0] + ' ' + '00:00:00',
       endTime: that.behindDay(1)
     })
-    wx.getStorage({
-      key: "shopInfo",
-      success: function (res) {
-        if (res.data) {
-          that.setData({
-            storeId: res.data.shop_id
-          })
-          that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag, res.data.shop_id)
-        }
-      }
-    })
+    // 获取热销商品数据
+    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag)
   },
   changeTags(e) {
     var that = this;
     var type = e.currentTarget.dataset.type;
     that.setData({
-      ind: 20
+      page: 1
     })
     that.data.arr = []
     that.setData({
       changTag: +type
     })
-    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag,that.data.storeId)
+    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag)
   },
   // 获取热销商品数据
-  getHotprodata(startTime, endTime, type,storeId) {
+  getHotprodata(startTime, endTime, type) {
     var that = this
     that.data.arr = []
     let url = app.globalData.hotunsalableURL;
@@ -81,9 +79,9 @@ Page({
     let params = {
       "start_time": startTime,
       "end_time": endTime,
-      "store_id": storeId,
+      "store_id": 0,
       "ranking_by": type,  //1销售金额 2销售数量 3订单量
-      "is_desc": 0,  //1热销 0滞销
+      "is_desc": 1,  //1热销 0滞销
       "org_id": 2, //组织id
       "top_n": 100
     }
@@ -97,50 +95,49 @@ Page({
       success: function (res) {
         if (res.statusCode === 200) {
           wx.hideLoading({});
-          let msg = JSON.parse(res.data)
-          let arr = []
+          let msg = JSON.parse(res.data);
+          // let arr = []
           let max = 0
           if (msg[1]) {
+            // 有数据
             that.setData({
               showtext: true
             })
-            // 有数据
-            for (let j in msg) {
-              arr.push({ name: msg[j].name })
-            }
             for (let i in msg) {
               if (that.data.changTag === 1) {
-                max = msg[arr.length].amount
+                max = msg[1].amount
                 msg[i].propertion = msg[i].amount / max * 100 + '%'
                 that.data.arr.push({
                   name: msg[i].name,
                   rightInfo: '￥' + msg[i].amount,
-                  propertion: msg[i].propertion
+                  propertion: msg[i].propertion,
+                  indexs: i
                 })
-
-                console.log(msg[that.data.arr.length].amount)
               } else if (that.data.changTag === 2) {
-                max = msg[arr.length].count
+                max = msg[1].count
                 msg[i].propertion = msg[i].count / max * 100 + '%'
                 that.data.arr.push({
                   name: msg[i].name,
                   rightInfo: msg[i].count + '件',
-                  propertion: msg[i].propertion
+                  propertion: msg[i].propertion,
+                  indexs: i
                 })
               } else {
-                max = msg[arr.length].order_number
+                max = msg[1].order_number
                 msg[i].propertion = msg[i].order_number / max * 100 + '%'
                 that.data.arr.push({
                   name: msg[i].name,
                   rightInfo: msg[i].order_number + '次',
-                  propertion: msg[i].propertion
+                  propertion: msg[i].propertion,
+                  indexs: i
                 })
               }
             }
+            console.log(that.data.arr,'得到的数据')
+            let array = that.data.arr.slice((that.data.page-1)*15,that.data.page*15)
             that.setData({
-              productInfoList: that.data.arr
+              productInfoList: array
             })
-
           } else {
             // 没有数据
             that.setData({
@@ -156,17 +153,19 @@ Page({
   loadMoredata() {
     var that = this;
     that.setData({
-      ind: that.data.ind + 20
+      ind: that.data.ind + 9
     })
-    // let pages = 1
-    // that.data.productInfoList.concat(that.data.arr.slice((that.data.page - 1) * 9, that.data.page * 9))
-    // that.data.page++
   },
   // 选择时间
   getDate(e) {
     var that = this
     that.setData({
-      ind: 20
+      page: 1
+      // ind: 20
+    })
+    let array = that.data.arr.slice((that.data.page - 1) * 15, that.data.page * 15)
+    that.setData({
+      productInfoList: array
     })
     that.data.arr = []
     if (e.detail.id === 0) {
@@ -185,6 +184,16 @@ Page({
         endTime: that.behindDay(1)
       })
     }
-    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag,that.data.storeId)
+    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag)
+  },
+  bindscrolltolowers () {
+    var that = this
+    console.log(that.data.productInfoList, '111111')
+    that.data.page++
+    let array = that.data.productInfoList.concat(that.data.arr.slice((that.data.page - 1) * 15, that.data.page * 15)) 
+    console.log('到底', array.concat())
+    that.setData({
+      productInfoList: array
+    })
   }
 })

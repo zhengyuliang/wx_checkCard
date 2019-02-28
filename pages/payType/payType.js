@@ -1,46 +1,9 @@
 // pages/hotCategory/hotCategory.js
 import * as echarts from '../../ec-canvas/echarts';
 const app = getApp()
-let payList = [
-  // { value: 335, name: '支付宝' },
-  // { value: 310, name: '现金' },
-  // { value: 234, name: '微信' },
-  // { value: 135, name: '其他' }
-]
+let payList = []
 let allData = 0
 var Chart = null
-
-// function initChart(canvas,width,height) {
-//   const chart = echarts.init(canvas,null,{
-//     width:width,
-//     height:height
-//   });
-//   canvas.setChart(chart);
-//   var option = {
-//     color: ['#FFB6C1', '#DC143C','yellow','purple'],
-//     tooltip: {
-//       trigger: 'item',
-//       formatter: "{a} <br/>{b}: {c} ({d}%)"
-//     },
-//     legend: {
-//       orient: 'vertical',
-//       // x: 'left',
-//       top: '90%',
-//       data: ['支付宝', '现金', '微信', '其他']
-//     },
-//     series: [
-//       {
-//         name: '访问来源',
-//         type: 'pie',
-//         radius: ['30%', '70%'],
-//         data: payList
-//       }
-//     ]
-//   };
-//   chart.setOption(option);
-//   return chart;
-// }
-
 
 Page({
 
@@ -53,7 +16,9 @@ Page({
       lazyLoad: true // 延迟加载
     },
     startTime: '', //开始时间
-    endTime: '' //结束时间
+    endTime: '', //结束时间
+    nodata: false,
+    storeId: '' //店铺id
   },
   getDate: function(e) {
     var that = this;
@@ -74,7 +39,7 @@ Page({
       })
     }
     console.log(payList,'获取的接口数据')
-    that.getPaytypedata(that.data.startTime, that.data.endTime)
+    that.getPaytypedata(that.data.startTime, that.data.endTime,that.data.storeId)
   },
   // 数据格式化
   formatter(date1) {
@@ -92,11 +57,15 @@ Page({
     return that.formatter(new Date(new Date(that.formatter(d) + ' ' + '23:59:59').getTime() - 86400000 * n)) + ' ' + '23:59:59'
   },
   // 获取支付类型的数据
-  getPaytypedata (startTime,endTime) {
+  getPaytypedata (startTime,endTime,storeID) {
     payList = []
     let that = this;
     let url = app.globalData.payTypeURL;
     let org_id = app.globalData.org_id;
+    wx.showLoading({
+      title: '数据加载中',
+      mask: true
+    })
     wx.request({
       url: url + '/v1/reports/sales_reports',
       method: 'POST',
@@ -108,13 +77,14 @@ Page({
         product_category: 0,
         search_content: "",
         starttime: startTime,
-        store_id: 0
+        store_id: storeID
       },
       header: {
         'authorization': app.globalData.member_token_type + " " + app.globalData.member_access_token
       },
       success: function (res) {
         if (res.statusCode === 200) {
+          wx.hideLoading()
           let msg = res.data
           let alipay = 0
           let wechat = 0
@@ -129,22 +99,41 @@ Page({
               other += item.other
             })
             arr = [
-              { value: alipay, name: '支付宝' },
-              { value: wechat, name: '微信' },
-              { value: cash, name: '现金' },
-              { value: other, name: '其他' }
+              { value: parseFloat(alipay).toFixed(2), name: '支付宝' },
+              { value: parseFloat(wechat).toFixed(2), name: '微信' },
+              { value: parseFloat(cash).toFixed(2), name: '现金' },
+              { value: parseFloat(other).toFixed(2), name: '其他' }
             ]
             payList = arr
             that.data.brr = arr
-            allData = alipay + wechat + cash + other
+            allData = parseFloat(alipay + wechat + cash + other).toFixed(2)
             // if (!Chart) {
               that.init_echarts(); //初始化图表
             // } else {
               // that.setOption(Chart); //更新数据
             // }
+          } else {
+            that.setData({
+              nodata: true
+            })
           }
           
         }
+      },
+      fail: function () {
+        wx.hideLoading({});
+        wx.getNetworkType({
+          success(res) {
+            const networkType = res.networkType;
+            if (networkType === 'none') {
+              wx.showToast({
+                title: '网络连接超时，请检查网络',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+          }
+        });
       }
     })
   },
@@ -169,10 +158,11 @@ Page({
   getOption: function () {
     // 指定图表的配置项和数据
     var option = {
-      color: ['#FFB6C1', '#DC143C','yellow','purple'],
+      color: ['#0090FF', '#00C5C3', '#00C64C', '#FFCB00'],
       tooltip: {
         trigger: 'item',
-        formatter: "{a} {b}: {c} ({d}%)"
+        confine: true,
+        position: ['50%', '50%']
       },
       legend: {
         orient: 'vertical',
@@ -184,8 +174,15 @@ Page({
         {
           name: '类型',
           type: 'pie',
-          radius: ['30%', '70%'],
-          data: payList
+          radius: ['0%', '55%'],
+          data: payList,
+          label: {
+            fontSize: 14,
+            formatter: '{b}:{c}({d}%)'
+          },
+          labelLine: {
+            length2: 2
+          }
         }
       ]
     };
@@ -202,6 +199,17 @@ Page({
       endTime: that.behindDay(1)
     })
     that.echartsComponnet = this.selectComponent('#mychart-dom-line')
-    that.getPaytypedata(that.data.startTime, that.data.endTime)
+    wx.getStorage({
+      key: "shopInfo",
+      success: function (res) {
+        if (res.data) {
+          that.setData({
+            storeId: res.data.shop_id
+          })
+          that.getPaytypedata(that.data.startTime, that.data.endTime,res.data.shop_id)
+        }
+      }
+    })
+    
   } 
 })

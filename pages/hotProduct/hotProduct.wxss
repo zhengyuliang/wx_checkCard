@@ -1,15 +1,15 @@
 /* pages/hotCategory/hotCategory.wxss */
-.containers{
+/* .containers{
   height: 100vh;
   display: flex;
   flex-direction: column;
-}
-.top-wrap{
+} */
+/* .top-wrap{
   position: relative;
   z-index: 99;
   background: #fff;
-}
-.navBar{
+} */
+/* .navBar{
   display: flex;
   justify-content: space-between;
   font-size: 26rpx;
@@ -19,27 +19,27 @@
   height: 80rpx;
   line-height: 80rpx;
   border-bottom: 1rpx solid #ccc;
-}
-.navtitle-active{
+} */
+/* .navtitle-active{
   color: #CD2E2E;
-}
-.line{
+} */
+/* .line{
   position: absolute;
   width: 120rpx;
   height: 4rpx;
   background:#CD2E2E;
   top:78rpx;
   left:47rpx;
-}
-.line-1{
+} */
+/* .line-1{
   left: 57rpx;
-}
-.line-2{
+} */
+/* .line-2{
   left: 375rpx;
 }
 .line-3{
   left: 615rpx;
-}
+} */
 .allInfo{
   display: flex;
   font-size: 26rpx;
@@ -62,8 +62,6 @@
 }
 .right{
   width: 95%;
-  
-  /* background: yellow; */
 }
 .proInfo{
   display: flex;
@@ -86,7 +84,7 @@
   height:15rpx;
   border-radius: 0 8rpx 8rpx 0;
 }
-.loadMore{
+/* .loadMore{
   width: 100%;
   color: #ccc;
   text-align: center;
@@ -98,8 +96,8 @@
   height: 100rpx;
   line-height: 100rpx;
   
-}
-.mainInfo-wrap {
+} */
+/* .mainInfo-wrap {
   display:flex;
   flex-direction:column;
   height:auto;
@@ -112,22 +110,74 @@
   margin:auto;
   margin-top:196rpx;
   margin-bottom: 100rpx;
-}
-.mainInfo {
+} */
+/* .mainInfo { */
   /* flex: 1;
   position: relative; */
-  overflow-x:hidden;
-  overflow-y:auto;
+  /* overflow-x:hidden; */
+  /* overflow-y:auto; */
   /* position: absolute; */
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-}
-.nodata{
+  /* width: 100%; */
+  /* height: 100%; */
+  /* left: 0; */
+  /* top: 0; */
+/* } */
+/* .nodata{
   width: 100%;
   text-align: center;
   font-size: 60rpx;
   color: #ccc;
   margin: 50% auto;
+} */
+
+.top-wrap{
+   width: 100%;
+   height: 200rpx;
+   position: fixed;
+   top: 0;
+   background: #fff;
+   z-index: 99;
+}
+.navBar{
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  position: relative;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 1rpx solid #ccc;
+}
+.scrollbox{
+  width: 100%;
+  height: auto;
+}
+.line{
+  position: absolute;
+  width: 120rpx;
+  height: 4rpx;
+  background:#CD2E2E;
+  top:78rpx;
+  left:47rpx;
+} 
+.line-1{
+  left: 57rpx;
+}
+.line-2{
+  left: 375rpx;
+}
+.line-3{
+  left: 615rpx;
+}
+.foot{
+  width: 100%;
+  position: fixed;
+  height: 100rpx;
+  line-height: 100rpx;
+  bottom: 0;
+  text-align: center;
+}
+.scrollbox{
+  margin-top: 216rpx;
 }

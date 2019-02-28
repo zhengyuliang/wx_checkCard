@@ -46,6 +46,7 @@ App({
 
     /**生产环境 */
     // shopURL: '', //店铺 Contact 刘益
+    // payTypeURL: 'https://petro-order.esmart365.com', //支付类型
     
     // hotunsalableURL:'https://a95oyxv7s6.execute-api.cn-northwest-1.amazonaws.com.cn/proc/report/usmile/ranking/sales' //热销滞销
 

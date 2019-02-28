@@ -16,8 +16,10 @@ Page({
     endTime: '', //结束时间
     page: 1,
     arr: [],
-    ind:9,// 索引
-    productInfoList: [] //商品信息
+    showtext: false,
+    ind:20,// 索引
+    productInfoList: [], //商品信息
+    storeId: '' //店铺id
   },
   // 切换nav展示不同的数据
   /**
@@ -40,27 +42,45 @@ Page({
   },
   onLoad: function (options) {
     var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          screenHeight: res.windowHeight - 80
+        })
+      }
+    })
     that.setData({
       startTime: that.behindDay(7).split(' ')[0] + ' ' + '00:00:00',
       endTime: that.behindDay(1)
     })
+    wx.getStorage({
+      key: "shopInfo",
+      success: function (res) {
+        if (res.data) {
+          that.setData({
+            storeId: res.data.shop_id
+          })
+          that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag, res.data.shop_id)
+        }
+      }
+    })
     // 获取热销商品数据
-    that.getHotprodata(that.data.startTime,that.data.endTime,that.data.changTag)
+    
   },
   changeTags(e) {
     var that = this;
     var type = e.currentTarget.dataset.type;
     that.setData({
-      ind: 9
+      ind: 20
     })
     that.data.arr = []
     that.setData({
       changTag: +type
     })
-    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag)
+    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag,that.data.storeId)
   },
   // 获取热销商品数据
-  getHotprodata (startTime,endTime,type) {
+  getHotprodata (startTime,endTime,type,storeId) {
     var that = this
     that.data.arr = []
     let url = app.globalData.hotunsalableURL;
@@ -70,7 +90,7 @@ Page({
       let params = {
         "start_time": startTime,
         "end_time": endTime,
-        "store_id": 0,
+        "store_id": storeId,
         "ranking_by": type,  //1销售金额 2销售数量 3订单量
         "is_desc": 1,  //1热销 0滞销
         "org_id": 2, //组织id
@@ -93,11 +113,13 @@ Page({
             let max = 0
             if (msg[1]) {
               // 有数据
+              that.setData({
+                showtext: true
+              })
               for (let i in msg) {  
                 if (that.data.changTag === 1) {
                   max = msg[1].amount
                   msg[i].propertion = msg[i].amount /max * 100 + '%'
-                
                   that.data.arr.push({
                     name: msg[i].name,
                     rightInfo: '￥'+msg[i].amount,
@@ -142,15 +164,12 @@ Page({
     that.setData({
       ind: that.data.ind+9
     })
-    // let pages = 1
-    // that.data.productInfoList.concat(that.data.arr.slice((that.data.page - 1) * 9, that.data.page * 9))
-    // that.data.page++
   },
   // 选择时间
   getDate (e) {
     var that = this
     that.setData({
-      ind: 9
+      ind: 20
     })
     that.data.arr = []
     if (e.detail.id === 0) {
@@ -169,6 +188,6 @@ Page({
         endTime: that.behindDay(1)
       })
     }
-    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag)
+    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag,that.data.storeId)
   }
 })
