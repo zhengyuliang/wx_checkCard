@@ -17,7 +17,8 @@ Page({
     },
     startTime: '', //开始时间
     endTime: '', //结束时间
-    nodata: false
+    nodata: false,
+    storeId: '' //店铺id
   },
   getDate: function(e) {
     var that = this;
@@ -38,7 +39,7 @@ Page({
       })
     }
     console.log(payList,'获取的接口数据')
-    that.getPaytypedata(that.data.startTime, that.data.endTime)
+    that.getPaytypedata(that.data.startTime, that.data.endTime,that.data.storeId)
   },
   // 数据格式化
   formatter(date1) {
@@ -56,7 +57,7 @@ Page({
     return that.formatter(new Date(new Date(that.formatter(d) + ' ' + '23:59:59').getTime() - 86400000 * n)) + ' ' + '23:59:59'
   },
   // 获取支付类型的数据
-  getPaytypedata (startTime,endTime) {
+  getPaytypedata (startTime,endTime,storeID) {
     payList = []
     let that = this;
     let url = app.globalData.payTypeURL;
@@ -76,7 +77,7 @@ Page({
         product_category: 0,
         search_content: "",
         starttime: startTime,
-        store_id: 0
+        store_id: storeID
       },
       header: {
         'authorization': app.globalData.member_token_type + " " + app.globalData.member_access_token
@@ -118,6 +119,21 @@ Page({
           }
           
         }
+      },
+      fail: function () {
+        wx.hideLoading({});
+        wx.getNetworkType({
+          success(res) {
+            const networkType = res.networkType;
+            if (networkType === 'none') {
+              wx.showToast({
+                title: '网络连接超时，请检查网络',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+          }
+        });
       }
     })
   },
@@ -183,6 +199,17 @@ Page({
       endTime: that.behindDay(1)
     })
     that.echartsComponnet = this.selectComponent('#mychart-dom-line')
-    that.getPaytypedata(that.data.startTime, that.data.endTime)
+    wx.getStorage({
+      key: "shopInfo",
+      success: function (res) {
+        if (res.data) {
+          that.setData({
+            storeId: res.data.shop_id
+          })
+          that.getPaytypedata(that.data.startTime, that.data.endTime,res.data.shop_id)
+        }
+      }
+    })
+    
   } 
 })

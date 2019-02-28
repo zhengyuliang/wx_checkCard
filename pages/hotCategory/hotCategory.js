@@ -18,7 +18,8 @@ Page({
     arr: [],
     showtext: false,
     ind:20,// 索引
-    productInfoList: [] //商品信息
+    productInfoList: [], //商品信息
+    storeId: '' //店铺id
   },
   // 切换nav展示不同的数据
   /**
@@ -52,8 +53,19 @@ Page({
       startTime: that.behindDay(7).split(' ')[0] + ' ' + '00:00:00',
       endTime: that.behindDay(1)
     })
+    wx.getStorage({
+      key: "shopInfo",
+      success: function (res) {
+        if (res.data) {
+          that.setData({
+            storeId: res.data.shop_id
+          })
+          that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag, res.data.shop_id)
+        }
+      }
+    })
     // 获取热销商品数据
-    that.getHotprodata(that.data.startTime,that.data.endTime,that.data.changTag)
+    
   },
   changeTags(e) {
     var that = this;
@@ -65,10 +77,10 @@ Page({
     that.setData({
       changTag: +type
     })
-    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag)
+    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag,that.data.storeId)
   },
   // 获取热销商品数据
-  getHotprodata (startTime,endTime,type) {
+  getHotprodata (startTime,endTime,type,storeId) {
     var that = this
     that.data.arr = []
     let url = app.globalData.hotunsalableURL;
@@ -78,7 +90,7 @@ Page({
       let params = {
         "start_time": startTime,
         "end_time": endTime,
-        "store_id": 0,
+        "store_id": storeId,
         "ranking_by": type,  //1销售金额 2销售数量 3订单量
         "is_desc": 1,  //1热销 0滞销
         "org_id": 2, //组织id
@@ -176,6 +188,6 @@ Page({
         endTime: that.behindDay(1)
       })
     }
-    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag)
+    that.getHotprodata(that.data.startTime, that.data.endTime, that.data.changTag,that.data.storeId)
   }
 })

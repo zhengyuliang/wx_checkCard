@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "热销品类",
+  "usingComponents": {
+    "Select": "/component/select/select"
+  }
+}
