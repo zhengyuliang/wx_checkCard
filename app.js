@@ -37,17 +37,17 @@ App({
     userInfo: '',
     org_id: 2, //组织ID
     /**测试环境 */
-    // shopURL: 'http://test-swagger.esmart365.com:5015', //店铺 Contact 刘益
-    // payTypeURL: 'http://test-swagger.esmart365.com:5014', //支付类型
-    // hotunsalableURL: 'https://a95oyxv7s6.execute-api.cn-northwest-1.amazonaws.com.cn/proc/report/usmile/ranking/sales-test',//热销滞销
+    shopURL: 'http://test-swagger.esmart365.com:5015', //店铺 Contact 刘益
+    payTypeURL: 'http://test-swagger.esmart365.com:5014', //支付类型
+    hotunsalableURL: 'https://a95oyxv7s6.execute-api.cn-northwest-1.amazonaws.com.cn/proc/report/usmile/ranking/sales-test',//热销滞销
 
     /**演示环境 */
     // shopURL: '', //店铺 Contact 刘益
 
     /**生产环境 */
-    shopURL: 'https://petro-order.esmart365.com', //店铺 Contact 刘益
-    payTypeURL: 'https://petro-order.esmart365.com', //支付类型
-    hotunsalableURL:'https://a95oyxv7s6.execute-api.cn-northwest-1.amazonaws.com.cn/proc/report/usmile/ranking/sales', //热销滞销
+    // shopURL: 'https://petro-order.esmart365.com', //店铺 Contact 刘益
+    // payTypeURL: 'https://petro-order.esmart365.com', //支付类型
+    // hotunsalableURL:'https://a95oyxv7s6.execute-api.cn-northwest-1.amazonaws.com.cn/proc/report/usmile/ranking/sales', //热销滞销
 
     member_access_token: "YsfrkQGy21BCIvP2aLlqVZjHz9lpLaDfsKldpUmFGEsXRhx4ycd5uOBPS42cm3Yu",
     member_token_type: "member",
