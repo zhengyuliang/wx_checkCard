@@ -93,7 +93,7 @@ Page({
         "store_id": storeId,
         "ranking_by": type,  //1销售金额 2销售数量 3订单量
         "is_desc": 1,  //1热销 0滞销
-        "org_id": 2, //组织id
+        "org_id": app.globalData.org_id, //组织id
         "top_n": 100
       }
       wx.request({

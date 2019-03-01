@@ -1,5 +1,6 @@
 // pages/index_data/index_data.js
 import * as echarts from '../../ec-canvas/echarts';
+let util = require("../../utils/util.js");
 let app = getApp();
 Page({
 
@@ -12,15 +13,18 @@ Page({
     shopList:[],//店铺列表内容
     dataInfo:'',
     firstData: true, //判断是否是第一次加载 
-    propArray: [{"id": 0,"text": "近7天"}, {"id": 1,"text": "近15天"}, {"id": 2,"text": "近30天"}],
+    propArray: [{"id": 7,"text": "近7天"}, {"id": 15,"text": "近15天"}, {"id": 30,"text": "近30天"}],
     selectShow:false,//判断隐藏
     tiemText:'',
     animationData:{},
     todaySales:{
-      dailySales:"12.00",
-      dailySalesTac:"10.02",
-      order_quantity:1232
+      amount: 0,
+      exclude_amount:0,
+      order_number:0
     },
+    time:[],//日期时间
+    order_obj:[], //次数
+    amount_obj:[], //销售量走
     ec:{
       lazyLoad: true
     } //图表走势
@@ -59,10 +63,13 @@ Page({
           _that.setData({
             shopInfo: res.data
           })
+          _that.getSalesTodyData();
+          _that.getSalesTrendDataAll(_that.data.tiemText.id);
         }
       })
+      
     }
-    _that.init();
+    
     
   },
   /**
@@ -127,6 +134,8 @@ Page({
               shopInfo: data.data[0],
               firstData: false
             })
+            _that.getSalesTodyData();
+            _that.getSalesTrendDataAll(_that.data.tiemText.id);
           }
         })
       }
@@ -166,19 +175,115 @@ Page({
       selectShow: !show,
       animationData: this.animation.export()
     })
+    _that.getSalesTrendDataAll(_that.data.tiemText.id);
   },
   /**
    * 获取今日销售额
    */
   getSalesTodyData:function(){
     let _that = this;
+    let url = app.globalData.payTypeURL + '/v1/app/reports/get/current_sales_data';
+    let time = util.formatData();
+    let data = {
+      store_id: _that.data.shopInfo.shop_id,
+      parms:time
+    };
+    console.log("提交今销售额数据>>>",data);
+    wx.showLoading({
+      title: '加载中...',
+    })
+    wx.request({
+      url: url,
+      method: 'GET',
+      data: data,
+      header: {
+        'authorization': app.globalData.member_token_type + " " + app.globalData.member_access_token
+      },
+      success:function(res){
+        wx.hideLoading();
+        if (res.statusCode === 200){
+          let msg = res.data;
+          if (msg){
+            msg.amount = msg.amount.toFixed(2);
+            msg.exclude_amount = msg.exclude_amount.toFixed(2);
+            _that.setData({
+              todaySales: msg
+            })
+          }
+        }
+        
+      },
+      fail:function(err){
+        wx.hideLoading();
+      }
+    })
+  },
 
+  getSalesTrendDataAll: function (num){
+    let _that = this;
+    // 0为销售额 1为次数
+    _that.getSalesTrendData(num,0);
+    _that.getSalesTrendData(num,1);
   },
   /**
    * 获取本店近期销售趋势
    */
-  getSalesTrendData:function(){
+  getSalesTrendData: function (num, query_type){
     let _that = this;
+    let url = app.globalData.payTypeURL + '/v1/app/reports/get/duration_sales_data';
+    let time = util.formatData();
+    let data = {
+      store_id: _that.data.shopInfo.shop_id,
+      date_time: time,
+      duration :num,
+      query_type: query_type
+    };
+    console.log("提交今销售额数据>>>", data);
+    // wx.showLoading({
+    //   title: '加载中...',
+    // })
+    wx.request({
+      url: url,
+      method: 'GET',
+      data: data,
+      header: {
+        'authorization': app.globalData.member_token_type + " " + app.globalData.member_access_token
+      },
+      success: function (res) {
+        console.log("获取店铺的信息内容",res);
+        let msg = res.data;
+        let time = [];
+        if (query_type === 0){
+          let cunt = [];
+          for(let i =0;i<msg.length;i++){
+            cunt.push(msg[i].amount);
+          }
+          _that.setData({
+            amount_obj:cunt
+          })
+        }
+        if(query_type === 1){
+          let order = [];
+          for (let i = 0; i < msg.length; i++) {
+            order.push(msg[i].order_number);
+          }
+          _that.setData({
+            order_obj: order
+          })
+        }
+        for (let i = 0; i < msg.length; i++) {
+          let t = msg[i].date.split("-");
+          let td = t[1] + '-' + t[2];
+          time.push(td);
+        }
+        _that.setData({
+          time: time
+        })
+        _that.init();
+      },
+      fail: function (err) {
+      }
+    })
   },
   /**
    * 初始化图表
@@ -207,6 +312,7 @@ Page({
     chart.setOption(this.getOption());  //获取新数据
   },
   getOption: function () {
+    let _that = this;
     // 指定图表的配置项和数据
     let option = {
       // title: {
@@ -234,7 +340,7 @@ Page({
         {
           type: 'category',
           boundaryGap: false,
-          data: ['2月1日', '2月2日', '2月3日', '2月4日', '2月5日', '2月6日', '2月7日']
+          data: _that.data.time
         }
       ],
       yAxis: [
@@ -249,7 +355,7 @@ Page({
         {
           name: '销售额含税(单位:元)',
           type: 'line',
-          data: [1001, 1451, 15, 1003, 112, 13, 190],
+          data: _that.data.amount_obj,
           // markPoint: {
           //   data: [
           //     { type: 'max', name: '最大值' },
@@ -265,7 +371,7 @@ Page({
         {
           name: '购买次数(单位:次)',
           type: 'line',
-          data: [1, 56, 2, 5, 3, 10, 56],
+          data: _that.data.order_obj,
           // markPoint: {
           //   data: [
           //     { name: '周最低', value: -2, xAxis: 1, yAxis: -1.5 }

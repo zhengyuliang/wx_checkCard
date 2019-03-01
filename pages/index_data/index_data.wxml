@@ -7,15 +7,15 @@
   <view class='f-b'><image class='img-icon' mode='aspectFill' src='../../images/shuju1.png'></image>今日销售额</view>
   <view class='f f-body'>
     <view class='item'>
-      <view class='price-red'>￥{{todaySales.dailySales}}</view>
+      <view class='price-red'>￥{{todaySales.amount}}</view>
       <view class='price-title'>日销售额(含税)</view>
     </view>
     <view class='item'>
-      <view class='price-red'>￥{{todaySales.dailySalesTac}}</view>
+      <view class='price-red'>￥{{todaySales.exclude_amount}}</view>
       <view class='price-title'>日销售额(不含税)</view>
     </view>
     <view class='item'>
-      <view class='price-red'>{{todaySales.order_quantity}}次</view>
+      <view class='price-red'>{{todaySales.order_number}}次</view>
       <view class='price-title'>购买次数(订单量)</view>
     </view>
   </view>
