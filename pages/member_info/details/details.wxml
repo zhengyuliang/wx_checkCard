@@ -1,0 +1,67 @@
+<!--pages/member_info/details/details.wxml-->
+<view class='body'>
+  <view class='item-title'>
+    <view class='title'><i-icon type="businesscard_fill" size='20' />基础信息</view>
+    <view class='btn' bindtap='modifiy'><i-icon type="setup_fill" size='20' />修改</view>
+  </view>
+  <view class='list-body'>
+    <view class='item'>
+      <view class='text-title'>会员编号：</view>
+      <view class='text-info'>00001</view>
+    </view>
+    <view class='item'>
+      <view class='text-title'>手机号：</view>
+      <view class='text-info'>18319924003</view>
+    </view>
+    <view class='item'>
+      <view class='text-title'>宝宝信息：</view>
+      <view class='text-info'>
+        <view class='list'>
+          <view class='list-name'>张三</view>
+          <view class='list-time'>2015-03-15</view>
+        </view>
+        <view class='list'>
+          <view class='list-name'>list</view>
+          <view class='list-time'>2015-03-15</view>
+        </view>
+      </view>
+    </view>
+    <view class='item'>
+      <view class='text-title'>会员地址：</view>
+      <view class='text-info'>广东珠海你佬佬家全部内容</view>
+    </view>
+    <view class='item'>
+      <view class='text-title'>会员标签：</view>
+      <view class='text-info'>白领妈妈,花粉过敏</view>
+    </view>
+    <view class='item'>
+      <view class='text-title'>开卡时间：</view>
+      <view class='text-info'>2019-03-08</view>
+    </view>
+    <view class='item'>
+      <view class='text-title'>注册来源：</view>
+      <view class='text-info'>店员A</view>
+    </view>
+  </view>
+  <view class='item-title'>
+    <view class='title'><i-icon type="keyboard" size='20' />消费概况</view>
+  </view>
+  <view class='info-body'>
+    <view class='info-list'>
+      <view class='info-num'>200.00</view>
+      <view class='info-text'>余额</view>
+    </view>
+    <view class='info-list'>
+      <view class='info-num'>234</view>
+      <view class='info-text'>积分</view>
+    </view>
+    <view class='info-list'>
+      <view class='info-num'>2</view>
+      <view class='info-text'>次卡</view>
+    </view>
+    <view class='info-list'>
+      <view class='info-num'>2000.66</view>
+      <view class='info-text'>累计消费</view>
+    </view>
+  </view>
+</view>

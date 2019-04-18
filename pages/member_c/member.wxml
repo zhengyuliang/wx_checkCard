@@ -1,0 +1,61 @@
+<!--pages/member_c/member.wxml-->
+<view class='item item-title'>
+  <view class='col'>
+    <view class='numeber'>{{member_num}}</view>
+    <view class='text-block'>会员总数</view>
+  </view>
+  <view class='col'>
+     <view class='numeber'>￥{{member_price}}</view>
+    <view class='text-block'>会员总余额</view>
+  </view>
+</view>
+<view class='item item-top'>
+  <view class='tab-body'>
+    <!-- <view class="tab" wx:for="{{date_num}}" wx:key = "{{item.id}}" bindtap="tabselect" data-index="{{item.id}}">{{item.name}}</view> -->
+    <view class="tab {{tabIndex == 0 ? 'tab-active' : ''}}" data-index = "0" bindtap="tabselect">今天</view>
+    <view class="tab {{tabIndex == 1 ? 'tab-active' : ''}}" data-index = "1" bindtap="tabselect">昨天</view>
+    <view class="tab {{tabIndex == 2 ? 'tab-active' : ''}}" data-index = "2" bindtap="tabselect">本周</view>
+    <view class="tab {{tabIndex == 3 ? 'tab-active' : ''}}" data-index = "3" bindtap="tabselect">本月</view>
+  </view>
+  <view class='tab-right' bindtap='tbacustom'>自定义</view>
+</view>
+<view class='item'>
+  <view class='col col-line col-l-10'>
+    <view class='title'>交易额：<text>15787.00</text></view>
+    <view class='text-body'>
+      <view class='text'>新会员：235.00</view>
+      <view class='text'>老会员：23125.00</view>
+    </view>
+  </view>
+  <view class='col col-line col-r-10'>
+    <view class='title'>订单数：<text>120</text></view>
+    <view class='text-body'>
+      <view class='text'>新会员：12</view>
+      <view class='text'>老会员：108</view>
+    </view>
+  </view>
+</view>
+<view class='item'>
+  <view class='col col-line col-l-10'>
+    <view class='title'>充值金额：<text>15787.00</text></view>
+    <view class='text-body'>
+      <view class='text'>新会员：235.00</view>
+      <view class='text'>老会员：23125.00</view>
+    </view>
+  </view>
+  <view class='col col-line col-r-10'>
+    <view class='title'>客单价：<text>15787.00</text></view>
+    <view class='text-body'>
+      <view class='text'>新会员：235.00</view>
+      <view class='text'>老会员：23125.00</view>
+    </view>
+  </view>
+</view>
+<view class='item'>
+  <view class='col col-line col-l-10'>
+    <view class='title title-r'>新增会员：<text>121</text>个</view>
+  </view>
+  <view class='col col-line col-r-10'>
+    <view class='title title-r'>会员活跃率：<text>66.7%</text></view>
+  </view>
+</view>

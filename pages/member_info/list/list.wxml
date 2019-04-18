@@ -1,0 +1,31 @@
+<!--pages/member_info/list/list.wxml-->
+<view class='body'>
+  <form bindsubmit='formSubmit' class='form'>
+    <view class='form-inner'>
+      <input type='text' name='userName'  placeholder='请输入手机号或者宝宝姓名' class='phone'></input>
+      <button type='warn' form-type='submit' class='btnLogin' disabled='{{loading}}'><i-icon type="search" size='20' />查询</button>
+    </view>
+  </form>
+  <scroll-view class='item-body' scroll-y="true" bindscrolltolower="loadingMoreScrollLower">
+    <view class='item' wx:for = '{{listData}}' wx:key="{{index}}">
+      <view class='title'><text class='name'>{{item.name}}</text><text wx:for-items="{{item.list}}" wx:for-item="list" wx:key="*item">{{list.name}}</text></view>
+      <view class='info'>
+        <view class='infolist'>
+          <view class='info-num'>￥{{item.price}}</view>
+          <view class='info-text'>余额</view>
+        </view>
+        <view class='infolist'>
+          <view class='info-num'>{{item.integral}}</view>
+          <view class='info-text'>积分</view>
+        </view>
+        <view class='infolist'>
+          <view class='info-num'>{{item.card}}</view>
+          <view class='info-text'>次卡</view>
+        </view>
+      </view>
+    </view>
+    <view class="loading" wx:if="{{searchLoading}}">正在载入...</view>
+    <view class="loading complete" wx:if="{{searchLoadingComplete}}">已加载全部</view>
+  </scroll-view>
+  <view class='nodata' wx:if="{{nodate}}">暂无数据</view>
+</view>

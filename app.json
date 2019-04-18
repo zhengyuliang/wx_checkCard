@@ -1,16 +1,21 @@
 {
   "pages": [
+    "pages/member_info/modifiy_info/modifiy",
+    "pages/member_info/details/details",
+    "pages/member_info/list/list",
+    "pages/member_c/member",
+    "pages/login_c/login",
     "pages/login/login",
     "pages/hotCategory/hotCategory",
     "pages/hotProduct/hotProduct",
     "pages/unsalable/unsalable",
-    
     "pages/payType/payType",
     "pages/index_data/index_data",
     "pages/index/index",
     "pages/record/record",
     "pages/detail/detail",
-    "pages/shop_select/shop_select"
+    "pages/shop_select/shop_select",
+    "pages/member_info/add_body/add_body"
   ],
   "window": {
     "backgroundTextStyle": "light",

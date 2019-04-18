@@ -1,0 +1,24 @@
+<!--pages/member_info/modifiy_info/modifiy.wxml-->
+<view class='body'>
+  <view class='item'>
+    <view class='title'><text>*</text>会员编号</view>
+    <input type='number' name='employNo'  placeholder='请输入会员编号' class='phone'></input>
+  </view>
+  <view class='item'>
+    <view class='title'><text>*</text>手机号码</view>
+    <input type='number' name='phone'  placeholder='请输入会员编号' class='phone'></input>
+  </view>
+  <view class='item'>
+    <view class='title'>会员地址</view>
+    <input type='text' name='address'  placeholder='请输入会员地址' class='phone'></input>
+  </view>
+  <view class='item'>
+    <view class='title'><text>*</text>会员标签</view>
+    <input type='text' name='phone'  placeholder='请选择会员标签' class='phone'></input>
+    <view class='trg'>编辑</view>
+  </view>
+  <view class='item item-title'>
+    <view class='title'>宝宝信息</view>
+    <button class='btn'><i-icon type="add" size='20' />添加宝宝</button>
+  </view>
+</view>

@@ -1,0 +1,10 @@
+<!--pages/login_c/login.wxml-->
+<form bindsubmit='formSubmit' class='form'>
+  <input type='number' maxlength = '11' name='phone'  placeholder='请输入手机号' class='phone'></input>
+  <view class='code'>
+    <input type='number' name='code' placeholder='请输入验证码'></input>
+    <view class="btn {{ codeLoading ? 'btn-disabled' : '' }}" bindtap='getCode'>{{codeText}}</view>
+  </view>
+  <button type='warn' form-type='submit' class='btnLogin' loading='{{loading}}' disabled='{{loading}}'>登录</button>
+</form>
+  

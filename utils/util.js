@@ -24,6 +24,7 @@ const formatData = () => {
   return y + '-' + m + '-' + d
 }
 
+
 module.exports = {
   formatTime: formatTime,
   formatData: formatData
