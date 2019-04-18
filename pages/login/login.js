@@ -88,6 +88,7 @@ Page({
   bindGetUserInfo: function (e) {
     let _this = this;
     if (e.detail.errMsg === 'getUserInfo:ok') {
+      console.log(e);
       app.globalData.userInfo = e.detail.userInfo;
       wx.setStorage({
         key: 'userInfo',
